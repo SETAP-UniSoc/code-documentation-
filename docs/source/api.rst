@@ -4,4 +4,7 @@ API
 .. autosummary::
    :toctree: generated
 
-   lumache
+   
+   backend.views
+   backend.models
+   backend.serializer
