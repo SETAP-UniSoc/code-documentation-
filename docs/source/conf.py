@@ -1,41 +1,39 @@
-# Configuration file for the Sphinx documentation builder.
-
 import os
 import sys
 sys.path.insert(0, os.path.abspath('C:\\Users\\stuti\\OneDrive\\SETAP\\SETAP CW\\TERM 2 CW\\UNIsoc\\backend'))
 
+# Mock all Django/DRF dependencies so Sphinx can import your code
+from unittest.mock import MagicMock
+
+class Mock(MagicMock):
+    @classmethod
+    def __getattr__(cls, name):
+        return MagicMock()
+
+MOCK_MODULES = [
+    'django', 'django.db', 'django.db.models', 'django.utils',
+    'django.utils.timezone', 'django.core', 'django.core.mail',
+    'rest_framework', 'rest_framework.views', 'rest_framework.response',
+    'rest_framework.permissions', 'rest_framework.exceptions',
+    'rest_framework.generics', 'rest_framework', 'flask',
+    'models', 'serializer',
+]
+sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
+
 autosummary_generate = True
 
 # -- Project information
-
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
-
+project = 'UNIsoc'
+copyright = '2024'
+author = 'Your Team'
 release = '0.1'
 version = '0.1.0'
 
-# -- General configuration
-
 extensions = [
-    'sphinx.ext.duration',
-    'sphinx.ext.doctest',
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    'sphinx.ext.intersphinx',
+    'sphinx.ext.duration',
 ]
 
-intersphinx_mapping = {
-    'python': ('https://docs.python.org/3/', None),
-    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
-}
-intersphinx_disabled_domains = ['std']
-
 templates_path = ['_templates']
-
-# -- Options for HTML output
-
 html_theme = 'sphinx_rtd_theme'
-
-# -- Options for EPUB output
-epub_show_urls = 'footnote'
