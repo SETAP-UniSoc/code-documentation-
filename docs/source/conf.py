@@ -1,9 +1,7 @@
 import os
 import sys
 
-# Absolute path to your main project root (UNIsoc)
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../'))
-
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../../../'))
 sys.path.insert(0, BASE_DIR)
 
 import django
