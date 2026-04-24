@@ -1,6 +1,6 @@
 ﻿models
 ======
 
-.. currentmodule:: models
+.. automodule:: models
 
-.. autodata:: models
+   
