@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # --- Django setup (preferred over mocking) ---
 import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.config.settings')
 django.setup()
 
 # -- Project information --
@@ -19,8 +19,8 @@ version = '0.1.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',     # 🔥 for your docstrings
-    'sphinx.ext.viewcode',     # 🔥 adds source code links
+    'sphinx.ext.napoleon',    
+    'sphinx.ext.viewcode',     
     'sphinx.ext.duration',
 ]
 
