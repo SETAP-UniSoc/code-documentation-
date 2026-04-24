@@ -461,30 +461,26 @@
 # CODE DOCUMENTATION VIEWS BELOW 
 ###################################################################################
 
+from unittest.mock import MagicMock
 
-from flask import request
-from rest_framework import generics
-from .models import User, Event, Society
-from .serializer import UserSerializer
-from .serializer import SocietySerializer
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
-from .serializer import EventSerializer
-from .import serializer
-from django.utils.timezone import now
-from django.db.models import Count, Q
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from django.core.mail import send_mail
-from django.utils import timezone
+# Mocked dependencies for documentation purposes
+request = MagicMock()
+generics = MagicMock()
+User = Event = Society = MagicMock()
+UserSerializer = SocietySerializer = EventSerializer = MagicMock()
+serializer = MagicMock()
+APIView = MagicMock()
+Response = MagicMock()
+IsAuthenticated = MagicMock()
+status = MagicMock()
+now = MagicMock()
+Count = Q = MagicMock()
+send_mail = MagicMock()
+timezone = MagicMock()
+NotificationPreference = Membership = MagicMock()
+PermissionDenied = MagicMock()
+
 from datetime import timedelta
-
-from .models import NotificationPreference, Society, Membership, Event
-
 
 
 class MySocietiesView(APIView):
