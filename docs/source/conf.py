@@ -16,7 +16,7 @@ MOCK_MODULES = [
     'rest_framework', 'rest_framework.views', 'rest_framework.response',
     'rest_framework.permissions', 'rest_framework.exceptions',
     'rest_framework.generics', 'rest_framework', 'flask',
-    'models', 'serializer', 'views', 'authentication', 'authentication.models',
+    'authentication', 'authentication.models',
 ]
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
 
