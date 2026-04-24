@@ -1,6 +1,13 @@
 API Documentation
 =================
 
+.. autosummary::
+   :toctree: generated
+
+   authentication.views
+   authentication.models
+   authentication.serializer
+
 Views
 -----
 
