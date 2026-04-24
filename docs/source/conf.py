@@ -1,8 +1,11 @@
 import os
 import sys
 
+from backend.config.settings import BASE_DIR
+
 # Add project root (VERY IMPORTANT)
 sys.path.insert(0, os.path.abspath('../../..'))
+sys.path.insert(0, BASE_DIR)
 
 # --- Django setup (preferred over mocking) ---
 import django
