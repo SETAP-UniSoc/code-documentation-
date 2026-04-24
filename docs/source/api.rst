@@ -1,9 +1,10 @@
-API
-===
+API Reference
+=============
 
 .. autosummary::
-   :toctree: generated
+   :toctree: generated/
+   :recursive:
 
-   views
-   models
-   serializer 
+   authentication.views
+   authentication.models
+   authentication.serializer
