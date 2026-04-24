@@ -4,9 +4,9 @@ API Documentation
 .. autosummary::
    :toctree: generated
 
-   authentication.views
-   authentication.models
-   authentication.serializer
+   backend.authentication.views
+   backend.authentication.models
+   backend.authentication.serializer
 
 Views
 -----
