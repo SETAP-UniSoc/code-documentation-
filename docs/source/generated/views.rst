@@ -2,6 +2,12 @@
 =====
 
 .. automodule:: views
-   :members:
-   :undoc-members:
-   :show-inheritance:
+
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+   
+      send_event_confirmation
+      send_event_reminders
+   
