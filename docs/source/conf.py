@@ -1,13 +1,11 @@
 import os
 import sys
 
-from backend.config.settings import BASE_DIR
+# Absolute path to your main project root (UNIsoc)
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../'))
 
-# Add project root (VERY IMPORTANT)
-sys.path.insert(0, os.path.abspath('../../..'))
 sys.path.insert(0, BASE_DIR)
 
-# --- Django setup (preferred over mocking) ---
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.config.settings')
 django.setup()
