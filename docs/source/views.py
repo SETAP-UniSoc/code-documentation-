@@ -461,61 +461,28 @@
 # CODE DOCUMENTATION VIEWS BELOW 
 ###################################################################################
 
-from unittest.mock import MagicMock
 
-# Mocked dependencies for documentation purposes
-request = MagicMock()
-generics = MagicMock()
-User = Event = Society = MagicMock()
-UserSerializer = SocietySerializer = EventSerializer = MagicMock()
-serializer = MagicMock()
-APIView = MagicMock()
-Response = MagicMock()
-IsAuthenticated = MagicMock()
-status = MagicMock()
-now = MagicMock()
-Count = Q = MagicMock()
-send_mail = MagicMock()
-timezone = MagicMock()
-NotificationPreference = Membership = MagicMock()
-PermissionDenied = MagicMock()
-
+from rest_framework.authtoken.models import Token
+from rest_framework import generics
+from .models import EventAttendance, User, Event, Society
+from .serializer import UserSerializer
+from .serializer import SocietySerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
+from .serializer import EventSerializer
+from .import serializer
+from django.utils.timezone import now
+from django.db.models import Count, Q
+from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from django.core.mail import send_mail
+from django.utils import timezone
 from datetime import timedelta
+import re
 
-
-class MySocietiesView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        try:
-            # Debug: Log the user making the request
-            print(f"Fetching societies for user: {request.user}")
-
-            # Fetch societies the user has joined using the Membership model
-            memberships = Membership.objects.filter(user=request.user, left_at__isnull=True)
-            societies = [membership.society for membership in memberships]
-
-            # Debug: Log the societies fetched
-            print(f"Societies fetched: {societies}")
-
-            data = [
-                {
-                    "id": s.id,
-                    "name": s.name,
-                    "description": s.description,
-                    "member_count": s.member_count,
-                }
-                for s in societies
-            ]
-
-            return Response(data)
-
-        except Exception as e:
-             # Debug: Log the error
-            print(f"Error in MySocietiesView: {e}")
-            return Response({"error": str(e)}, status=500)
-
-
+from .models import NotificationPreference, Society, Membership, Event
 
 
 class UserListView(generics.ListAPIView):
@@ -622,7 +589,6 @@ class AddEventView(generics.CreateAPIView):
             created_by=self.request.user,
             society=society
         )
-    serializer_class = SocietySerializer
 
 
 class DeleteEventView(generics.DestroyAPIView):
@@ -644,71 +610,6 @@ class DeleteEventView(generics.DestroyAPIView):
         return Event.objects.filter(created_by=self.request.user)
 
 
-    serializer_class = SocietySerializer
-
-# class CreateEventView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def post(self, request):
-
-#         if request.user.role != "admin":
-#             return Response({"error": "Admins only"}, status=403)
-
-#         try:
-#             society = Society.objects.get(admin=request.user)
-#         except Society.DoesNotExist:
-#             return Response({"error": "No society found"}, status=404)
-
-#         data = request.data.copy()
-#         data["society"] = society.id
-#         data["created_by"] = request.user.id
-
-#         serializer = EventSerializer(data=data)
-
-#         if serializer.is_valid():
-#             event = serializer.save()   # capture the event
-
-#             send_event_confirmation(request.user, event)
-
-#             return Response(serializer.data, status=201)
-
-#         return Response(serializer.errors, status=400)
-
-
-# class CreateEventView(APIView):
-#     permission_classes = [IsAuthenticated]
-
-#     def post(self, request):
-
-#         if request.user.role != "admin":
-#             return Response({"error": "Admins only"}, status=403)
-
-#         try:
-#             society = Society.objects.get(admin=request.user)
-#         except Society.DoesNotExist:
-#             return Response({"error": "No society found"}, status=404)
-
-#         data = request.data.copy()
-
-#         # 🔥 FIX capacity issue
-#         if data.get("capacity_limit") in [0, "0", ""]:
-#             data["capacity_limit"] = None
-
-#         serializer = EventSerializer(data=data)
-
-#         if serializer.is_valid():
-#             event = serializer.save(
-#                 society=society,            # ✅ FIXES NULL ERROR
-#                 created_by=request.user     # ✅ GOOD PRACTICE
-#             )
-
-#             send_event_confirmation(request.user, event)
-
-#             return Response(serializer.data, status=201)
-
-#         print(serializer.errors)  # DEBUG
-#         return Response(serializer.errors, status=400)
-    
 class SocietyEventView(APIView):
     """API view to retrieve or create events for a specific society.
 
@@ -731,19 +632,12 @@ class SocietyEventView(APIView):
         :rtype: Response
         """
         try:
-            print(f"Fetching society with ID: {society_id}")
             society = Society.objects.get(id=society_id)
         except Society.DoesNotExist:
-            print(f"Society with ID {society_id} not found")
             return Response({"error": "Society not found"}, status=404)
 
-        print(f"Fetching events for society: {society.name}")
         events = Event.objects.filter(society=society)
-        print(f"Events found: {events.count()}")
-
         serializer = EventSerializer(events, many=True)
-        print(f"Serialized events: {serializer.data}")
-
         return Response(serializer.data)
 
     def post(self, request, society_id):
@@ -991,27 +885,6 @@ class User_ProfileView(APIView):
         user.name = new_name
         user.save()
         return Response({"message": "Name changed successfully"})
-    
-# def send_event_confirmation(user, event):
-#     if not NotificationPreference.objects.filter(
-#         user=user,
-#         society=event.society,
-#         notify_new_events=True
-#     ).exists():
-#         return
-
-#     send_mail(
-#         subject="Event Created Successfully",
-#         message=f"""
-# Your event "{event.title}" has been created successfully.
-
-# Date: {event.start_time}
-# Location: {event.location}
-# """,
-#         from_email=None,
-#         recipient_list=[user.email],
-#         fail_silently=False,
-#     )
 
 
 class NotificationView(APIView):
@@ -1166,4 +1039,519 @@ Location: {event.location}
                 fail_silently=False,
             )
 
+class SocietyAdminDetailView(APIView):
+    """
+    API view to retrieve detailed information about a society,
+    including its events.
 
+    Returns:
+    - Society details
+    - List of associated events
+
+    Does not require admin privileges.
+    """
+    permission_classes = [IsAuthenticated]
+
+    # GET society details — used by both admin and user society page
+    def get(self, request, society_id):
+        try:
+            society = Society.objects.get(id=society_id)
+        except Society.DoesNotExist:
+            return Response({"error": "Society not found"}, status=404)
+
+        return Response({
+            "id": society.id,
+            "name": society.name,
+            "category": society.category,
+            "description": society.description,
+        })
+
+    # PATCH update society description — admin only
+    def patch(self, request, society_id):
+        if request.user.role != "admin":
+            return Response({"error": "Admin only"}, status=403)
+
+        try:
+            society = Society.objects.get(id=society_id, admin=request.user)
+        except Society.DoesNotExist:
+            return Response({"error": "Society not found or not your society"}, status=404)
+
+        description = request.data.get("description")
+        if description is not None:
+            society.description = description
+            society.save()
+
+        return Response({
+            "id": society.id,
+            "name": society.name,
+            "category": society.category,
+            "description": society.description,
+            "message": "Society updated successfully"
+        })
+
+
+class SocietyMembershipCheckView(APIView):
+    """
+    Check if the authenticated user is an active member of a society.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, society_id):
+        # Check active membership (not left)
+        is_member = Membership.objects.filter(
+            user=request.user,
+            society_id=society_id,
+            left_at__isnull=True
+        ).exists()
+
+        return Response({
+            "society_id": society_id,
+            "is_member": is_member
+        }, status=status.HTTP_200_OK)
+    
+class SocietyDetailView(APIView):
+    """
+    Retrieve a society along with its events.
+    """
+    def get(self, request, society_id):
+        try:
+            society = Society.objects.get(id=society_id)
+        except Society.DoesNotExist:
+            return Response({"error": "Society not found"}, status=404)
+
+        events = Event.objects.filter(society=society)
+
+        event_data = []
+        for event in events:
+            event_data.append({
+                "id": event.id,
+                "title": event.title,
+                "description": event.description,
+                "location": event.location,
+                "start_time": event.start_time,
+            })
+
+        return Response({
+            "id": society.id,
+            "name": society.name,
+            "category": society.category,
+            "description": society.description,
+            "events": event_data
+        })   
+
+class RegisterView(APIView):
+    '''
+    API view to handle user registration.
+    Accepts user details including first name, last name, email,
+    university number (UP number), and password.
+
+    Validates:
+    - All required fields are provided
+    - Passwords match
+    - Password strength (length, uppercase, number, special character)
+
+    Returns:
+    - 201 Created on success
+    - 400 Bad Request on validation failure
+    '''
+    def post(self, request):
+        """
+        Handle user registration.
+
+        :param request: HTTP request containing user registration data
+        :type request: Request
+        :return: Success or error response
+        :rtype: Response
+        """        
+        first_name = request.data.get("first_name")
+        last_name = request.data.get("last_name")
+        email = request.data.get("email")
+        up_number = request.data.get("up_number")
+        password = request.data.get("password")
+        confirm_password = request.data.get("confirm_password")
+
+        if not all([first_name, last_name, email, up_number, password, confirm_password]):
+            return Response(
+                {"error": "All fields are required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if password != confirm_password:
+            return Response(
+                {"error": "Passwords do not match"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Password strength validation
+        if len(password) < 8:
+            return Response(
+                {"error": "Password must be at least 8 characters long"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not re.search(r"[A-Z]", password):
+            return Response(
+                {"error": "Password must contain at least one uppercase letter"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not re.search(r"[0-9]", password):
+            return Response(
+                {"error": "Password must contain at least one number"},
+                status=status.HTTP_400_BAD_REQUEST
+            )   
+
+        if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+            return Response(
+                {"error": "Password must contain at least one special character"},
+                status=status.HTTP_400_BAD_REQUEST
+         )
+
+
+
+class LoginView(APIView):
+    """
+    API view to authenticate a user and return an auth token.
+
+    Users can log in using either:
+    - Email
+    - University number (UP number)
+
+    Returns:
+    - Auth token and user details on success
+    - 401 Unauthorized if credentials are invalid
+    """
+    def post(self, request):
+        """
+        Authenticate the user and generate a token.
+
+        :param request: HTTP request containing login credentials
+        :type request: Request
+        :return: Authentication token and user info
+        :rtype: Response
+        """
+        email = request.data.get("email")
+        up_number = request.data.get("up_number")
+        password = request.data.get("password")
+
+        if not password:
+            return Response({"error": "Password required"}, status=400)
+
+        try:
+            if email:
+                user = User.objects.get(email__iexact=email)
+            elif up_number:
+                up_number = up_number.lower()
+                if not up_number.startswith("up"):
+                    up_number = f"up{up_number}"
+                user = User.objects.get(up_number__iexact=up_number)
+            else:
+                return Response({"error": "Email or UP number required"}, status=400)
+
+            if user.check_password(password):
+                token, _ = Token.objects.get_or_create(user=user)
+
+                society_id = None
+                society_name = None
+
+                if user.role == "admin":
+                    try:
+                        society = Society.objects.get(admin=user)
+                        society_id = society.id
+                        society_name = society.name
+                    except Society.DoesNotExist:
+                        pass
+
+                return Response({
+                    "token": token.key,
+                    "role": user.role,
+                    "email": user.email,
+                    "up_number": user.up_number,
+                    "society_id": society_id,      
+                    "society_name": society_name   
+                })
+
+        except User.DoesNotExist:
+            pass
+
+        return Response({"error": "Invalid credentials"}, status=401)
+    
+class LeaveSocietyView(APIView):
+    """
+    API view to allow a user to leave a society.
+
+    Sets the `left_at` timestamp on the membership record
+    instead of deleting it.
+
+    Requires authentication.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, society_id):
+        user = request.user
+
+        try:
+            society = Society.objects.get(id=society_id)
+        except Society.DoesNotExist:
+            return Response(
+                {"error": "Society not found"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+
+        try:
+            membership = Membership.objects.get(
+                user=user,
+                society=society,
+                left_at__isnull=True
+                
+            )
+        except Membership.DoesNotExist:
+            return Response(
+                {"error": "You are not an active member"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        membership.left_at = timezone.now()
+        membership.save()
+
+        return Response(
+            {"message": "Successfully left society"},
+            status=status.HTTP_200_OK,
+        )
+    
+class LeaveEventView(APIView):
+    """
+    API view to allow a user to leave an event.
+
+    Marks attendance as inactive by setting `left_at`.
+
+    Requires authentication.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, event_id):
+        try:
+            attendance = EventAttendance.objects.get(
+                user=request.user,
+                event_id=event_id,
+                left_at__isnull=True
+            )
+        except EventAttendance.DoesNotExist:
+            return Response({"error": "Not attending this event"}, status=400)
+
+        attendance.left_at = timezone.now()
+        attendance.save()
+
+        attendee_count = EventAttendance.objects.filter(
+            event_id=event_id, 
+            left_at__isnull=True).count()
+
+        return Response({"message": "Left event successfully"})
+    
+class JoinSocietyView(APIView):
+    """
+    API view to allow a user to join a society.
+
+    Behaviour:
+    - Creates a new membership if none exists
+    - Returns 'Already joined' if user is already active
+    - Re-activates membership if previously left
+
+    Requires authentication.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, society_id):
+        user = request.user
+
+        try:
+            society = Society.objects.get(id=society_id)
+        except Society.DoesNotExist:
+            return Response(
+                {"error": "Society not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        membership, created = Membership.objects.get_or_create(
+            user=user,
+            society=society
+        )
+
+        if created:
+            return Response(
+                {"message": "Joined successfully"},
+                status=status.HTTP_201_CREATED
+            )
+
+        if membership.left_at is None:
+            return Response({"message": "Already joined"}, status=200)
+
+        # Rejoining
+        membership.left_at = None
+        membership.joined_at = timezone.now()
+        membership.save()
+
+        return Response({"message": "Rejoined successfully"}, status=200)
+            
+class JoinEventView(APIView):
+    """
+    API view to allow a user to join an event.
+
+    Behaviour:
+    - Prevents joining past events
+    - Creates attendance record if not existing
+    - Re-activates attendance if previously left
+
+    Returns updated attendee count.
+
+    Requires authentication.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, event_id):
+
+        try:
+            event = Event.objects.get(id=event_id)
+        except Event.DoesNotExist:
+            return Response({"error": "Event not found"}, status=404)
+
+        # prevent joining past events
+        if event.event_date < timezone.now():
+            return Response(
+                {"error": "Event has already passed"},
+                status=400
+            )
+
+        attendance, created = EventAttendance.objects.get_or_create(
+            user=request.user,
+            event=event,
+            defaults={"left_at": None}
+        )
+
+        if not created:
+            if attendance.left_at is None:
+                return Response({"message": "Already attending"}, status=400)
+            else:
+                attendance.left_at = None
+                attendance.joined_at = timezone.now()
+                attendance.save()
+
+        attendee_count = EventAttendance.objects.filter(
+            event=event,
+            left_at__isnull=True
+        ).count()
+
+        return Response({
+            "message": "Joined event",
+            "attendee_count": attendee_count
+        })
+    
+class AnalyticsView(APIView):
+    """
+    API view to provide analytics for a society admin.
+
+    Includes:
+    - Membership growth over time
+    - Total active members
+    - Total events
+    - Event attendance statistics
+    - Most popular event
+
+    Query Parameters:
+    - period: 'week', 'month', '6months', 'year'
+
+    Requires:
+    - Authenticated admin user
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+
+        if request.user.role != "admin":
+            return Response({"error": "Admins only"}, status=403)
+
+        period = request.query_params.get("period", "week")
+
+        try:
+            society = Society.objects.get(admin=request.user)
+        except Society.DoesNotExist:
+            return Response({"error": "Society not found"}, status=404)
+
+        now = timezone.now()
+
+        # Decide grouping & range
+        if period == "week":
+            days_range = 7
+            delta = timedelta(days=1)
+            label_format = "%a"  # Mon Tue Wed
+        elif period == "month":
+            days_range = 30
+            delta = timedelta(days=1)
+            label_format = "%d %b"
+        elif period == "6months":
+            days_range = 26
+            delta = timedelta(weeks=1)
+            label_format = "Week %W"
+        elif period == "year":
+            days_range = 12
+            delta = timedelta(days=30)
+            label_format = "%b"
+        else:
+            return Response({"error": "Invalid period"}, status=400)
+
+        start_date = now - (delta * days_range)
+
+        labels = []
+        totals = []
+
+        current_date = start_date
+
+        for _ in range(days_range):
+
+            total = Membership.objects.filter(
+                society=society,
+                joined_at__lte=current_date
+            ).filter(
+                Q(left_at__isnull=True) | Q(left_at__gt=current_date)
+            ).count()
+
+            labels.append(current_date.strftime(label_format))
+            totals.append(total)
+
+            current_date += delta
+
+        society = Society.objects.get(admin=request.user) # gets admis society
+        total_events = society.events.count() # total events in that society
+        events_stats = society.events.annotate(
+            attendee_count = Count(
+                "eventattendance",
+                filter = Q(eventattendance__left_at__isnull=True)
+            )
+        ).values("title", "attendee_count")
+
+        #most popular event
+        most_popular = society.events.annotate(
+            attendee_count = Count(
+                "eventattendance",
+                filter = Q(eventattendance__left_at__isnull=True)
+            )
+        ).order_by("-attendee_count").values("title", "attendee_count").first()
+
+        live_count = Membership.objects.filter(
+            society=society,
+            left_at__isnull=True
+        ).count()
+
+        return Response({
+            "labels": labels,
+            "totals": totals,
+            "live_count": live_count,
+            "total_events": total_events,
+            "events_stats": list(events_stats),
+            "most_popular": most_popular,
+            "event_attendance": list(events_stats)
+        })
+
+        

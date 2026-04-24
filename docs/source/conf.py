@@ -1,41 +1,40 @@
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
 
-# Mock all Django/DRF dependencies so Sphinx can import your code
-from unittest.mock import MagicMock
+# Add project root (VERY IMPORTANT)
+sys.path.insert(0, os.path.abspath('..'))
 
-class Mock(MagicMock):
-    @classmethod
-    def __getattr__(cls, name):
-        return MagicMock()
+# --- Django setup (preferred over mocking) ---
+import django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project.settings')
+django.setup()
 
-MOCK_MODULES = [
-    'django', 'django.db', 'django.db.models', 'django.utils',
-    'django.utils.timezone', 'django.core', 'django.core.mail',
-    'django.contrib', 'django.contrib.auth', 'django.contrib.auth.models',
-    'django.contrib.auth.base_user', 'django.core.validators', 'django.conf',
-    'rest_framework', 'rest_framework.views', 'rest_framework.response',
-    'rest_framework.permissions', 'rest_framework.exceptions',
-    'rest_framework.generics', 'flask',
-    'authentication', 'authentication.models',
-]
-sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
-
-autosummary_generate = True
-
-# -- Project information
+# -- Project information --
 project = 'UNIsoc'
-copyright = '2024'
 author = 'Your Team'
 release = '0.1'
 version = '0.1.0'
 
+# -- General configuration --
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
+    'sphinx.ext.napoleon',     # 🔥 for your docstrings
+    'sphinx.ext.viewcode',     # 🔥 adds source code links
     'sphinx.ext.duration',
 ]
 
+autosummary_generate = True
+
+# Better autodoc output
+autodoc_default_options = {
+    'members': True,
+    'undoc-members': True,
+    'show-inheritance': True,
+}
+
+# Templates
 templates_path = ['_templates']
+
+# Theme
 html_theme = 'sphinx_rtd_theme'
