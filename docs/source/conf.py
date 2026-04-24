@@ -13,9 +13,10 @@ class Mock(MagicMock):
 MOCK_MODULES = [
     'django', 'django.db', 'django.db.models', 'django.utils',
     'django.utils.timezone', 'django.core', 'django.core.mail',
+    'django.contrib', 'django.contrib.auth', 'django.contrib.auth.models',
     'rest_framework', 'rest_framework.views', 'rest_framework.response',
     'rest_framework.permissions', 'rest_framework.exceptions',
-    'rest_framework.generics', 'rest_framework', 'flask',
+    'rest_framework.generics', 'flask',
     'authentication', 'authentication.models',
 ]
 sys.modules.update((mod_name, Mock()) for mod_name in MOCK_MODULES)
