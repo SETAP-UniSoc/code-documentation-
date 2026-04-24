@@ -2,9 +2,11 @@
 Serializers for converting UNIsoc models to JSON.
 """
 
-from rest_framework import serializers
-from .models import NotificationPreference, Society, User
-from .models import Event, NotificationPreference
+from unittest.mock import MagicMock
+
+NotificationPreference = Society = User = MagicMock()
+Event = Membership = MagicMock()
+serializers = MagicMock()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
