@@ -1,6 +1,6 @@
 import os
 import sys
-sys.path.insert(0, os.path.abspath('C:\\Users\\stuti\\OneDrive\\SETAP\\SETAP CW\\TERM 2 CW\\UNIsoc\\backend'))
+sys.path.insert(0, os.path.abspath('.'))
 
 # Mock all Django/DRF dependencies so Sphinx can import your code
 from unittest.mock import MagicMock
