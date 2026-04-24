@@ -14,6 +14,7 @@ MOCK_MODULES = [
     'django', 'django.db', 'django.db.models', 'django.utils',
     'django.utils.timezone', 'django.core', 'django.core.mail',
     'django.contrib', 'django.contrib.auth', 'django.contrib.auth.models',
+    'django.contrib.auth.base_user', 'django.core.validators', 'django.conf',
     'rest_framework', 'rest_framework.views', 'rest_framework.response',
     'rest_framework.permissions', 'rest_framework.exceptions',
     'rest_framework.generics', 'flask',
