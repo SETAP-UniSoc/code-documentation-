@@ -955,7 +955,7 @@ class JoinEventView(APIView):
             return Response({"error": "Event not found"}, status=404)
 
         # prevent joining past events
-        if event.event_date < timezone.now():
+        if event.start_time < timezone.now():
             return Response(
                 {"error": "Event has already passed"},
                 status=400
