@@ -2,7 +2,7 @@ import os
 import sys
 
 # Add project root (VERY IMPORTANT)
-sys.path.insert(0, os.path.abspath('..'))
+sys.path.insert(0, os.path.abspath('../../..'))
 
 # --- Django setup (preferred over mocking) ---
 import django
