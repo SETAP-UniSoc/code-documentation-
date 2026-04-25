@@ -5,6 +5,10 @@ BASE_DIR = r"C:\Users\stuti\OneDrive\SETAP\SETAP CW\TERM 2 CW\UNIsoc"
 
 sys.path.insert(0, os.path.join(BASE_DIR, "backend"))  # ✅ IMPORTANT
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+
+import django
+django.setup()
 # ---- Sphinx extensions (IMPORTANT) ----
 extensions = [
     "sphinx.ext.autodoc",
