@@ -1,6 +1,1 @@
-﻿serializer
-==========
-
-.. automodule:: serializer
-
-   
+﻿

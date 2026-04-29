@@ -1,30 +1,35 @@
-import os
-import sys
+# Configuration file for the Sphinx documentation builder.
 
-BASE_DIR = r"C:\Users\stuti\OneDrive\SETAP\SETAP CW\TERM 2 CW\UNIsoc"
+# -- Project information
 
-sys.path.insert(0, os.path.join(BASE_DIR, "backend"))  # ✅ IMPORTANT
+project = 'Lumache'
+copyright = '2021, Graziella'
+author = 'Graziella'
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+release = '0.1'
+version = '0.1.0'
 
-import django
-django.setup()
-# ---- Sphinx extensions (IMPORTANT) ----
+# -- General configuration
+
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
+    'sphinx.ext.duration',
+    'sphinx.ext.doctest',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.intersphinx',
 ]
 
-autosummary_generate = True
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3/', None),
+    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
+}
+intersphinx_disabled_domains = ['std']
 
-autodoc_mock_imports = [
-    "django",
-    "django.db",
-    "django.utils",
-    "django.core",
-    "django.contrib",
-    "rest_framework",
-    "flask",
-    "celery",
-    "config.celery",
-]
+templates_path = ['_templates']
+
+# -- Options for HTML output
+
+html_theme = 'sphinx_rtd_theme'
+
+# -- Options for EPUB output
+epub_show_urls = 'footnote'
