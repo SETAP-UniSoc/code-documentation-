@@ -17,6 +17,12 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Contents:
 
-   usage
+   scope
+   requirements
+   implementation
+   setup
+   components
    api
