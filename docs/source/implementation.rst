@@ -24,7 +24,6 @@ Example Code
         return Response(serializer.data)
 
     def post(self, request):
-        """Update the authenticated user's display name.
 
         user = request.user
         new_name = request.data.get("name")
