@@ -20,4 +20,4 @@ def get_random_ingredients(kind=None):
     :return: The ingredients list.
     :rtype: list[str]
     """
-    return ["shells", "gorgonzola", "basil"]
+    return ["shells", "gorgonzola", "parsley"]

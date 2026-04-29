@@ -1,6 +1,1 @@
-﻿models
-======
-
-.. automodule:: models
-
-   
+﻿
