@@ -21,4 +21,4 @@ Run the Project
 
 .. code-block:: bash
 
-   python main.py
+   python main.py 
