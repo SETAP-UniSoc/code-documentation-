@@ -17,9 +17,9 @@ Features
 Endpoint
 --------
 
-.. code-block:: http
+.. code-block:: python
 
-   GET /api/analytics/?period=week
+   path("my-analytics/", AnalyticsView.as_view(), name="analytics")
 
 Authentication
 --------------
