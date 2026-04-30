@@ -10,9 +10,9 @@ an authentication token.
 Endpoint
 --------
 
-.. code-block:: http
+.. code-block:: python
 
-   POST /api/login/
+   path("login/", LoginView.as_view(), name="login")
 
 Response
 --------
