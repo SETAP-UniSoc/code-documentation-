@@ -10,14 +10,12 @@ email, password, and notification preferences.
 Endpoints
 ---------
 
-.. code-block:: http
+.. code-block:: python
 
    path('change-password/', ChangePasswordView.as_view(), name='change-password')
    path('change-email/', ChangeEmailView.as_view(), name='change-email')
-   GET /api/profile/
-   PATCH /api/profile/
-   GET /api/notifications/
-   POST /api/notifications/
+   path('user/profile/', UserProfileView.as_view(), name='user-profile')
+   path('notifications/', NotificationView.as_view(), name='notifications')
 
 Authentication
 --------------
@@ -42,13 +40,7 @@ Implementation
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        """Change the authenticated user's password.
 
-        :param request: The HTTP request containing ``old_password`` and ``new_password``.
-        :type request: Request
-        :return: Success message, or 400 if the old password is incorrect.
-        :rtype: Response
-        """
         user = request.user
         old_password = request.data.get("old_password")
         new_password = request.data.get("new_password")
@@ -62,20 +54,18 @@ Implementation
 
 API view to allow an authenticated user to change their password.
 The user must provide their current password to verify their identity before setting a new one.
-    
+    :param request: The HTTP request containing ``old_password`` and ``new_password``.
+    :type request: Request
+    :return: Success message, or 400 if the old password is incorrect.
+    :rtype: Response
+        
 .. code-block:: python
    class ChangeEmailView(APIView):
 
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        """Change the authenticated user's email address.
-
-        :param request: The HTTP request containing ``new_email``.
-        :type request: Request
-        :return: Success message, or 400 if the email is missing or already in use.
-        :rtype: Response
-        """
+        
         user = request.user
         new_email = request.data.get("new_email")
 
@@ -91,7 +81,11 @@ The user must provide their current password to verify their identity before set
 
 API view to allow an authenticated user to change their email address.
 The new email must not already be in use by another account.
-
+    :param request: The HTTP request containing ``new_email``.
+    :type request: Request
+    :return: Success message, or 400 if the email is missing or already in use.
+    :rtype: Response
+    
 .. code-block:: python 
    class UserProfileView(APIView):
 
