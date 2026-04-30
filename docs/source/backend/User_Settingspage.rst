@@ -12,8 +12,8 @@ Endpoints
 
 .. code-block:: http
 
-   POST /api/change-password/
-   POST /api/change-email/
+   path('change-password/', ChangePasswordView.as_view(), name='change-password')
+   path('change-email/', ChangeEmailView.as_view(), name='change-email')
    GET /api/profile/
    PATCH /api/profile/
    GET /api/notifications/
