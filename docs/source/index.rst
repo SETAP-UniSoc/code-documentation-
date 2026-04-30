@@ -32,21 +32,16 @@ Contents
    components
    usage
    api
+   backend/User_Registration
+   backend/User_Login
+   backend/User_Homepage
+   backend/User_MySocietypage
+   backend/User_MyEventspage
+   backend/User_Settingspage
+   backend/Event_Detailspage
+   backend/Admin_Eventspage
+   backend/Admin_Analyticspage
 
-Pages 
------
 
-user_registration
-admin_registration
-user_login
-admin_login
-user_homepage
-user_mysocietypage
-user_myeventpage
-user_settingspage
-admin_homepage
-admin_eventspage
-admin_settingspage
-admin_events
-admin_analytics
+
 
