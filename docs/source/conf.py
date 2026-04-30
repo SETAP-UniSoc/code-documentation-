@@ -16,11 +16,12 @@ release = '1.0'
 
 html_theme = "sphinx_rtd_theme"
 
-extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
-    "sphinx.ext.napoleon",
-]
+html_theme_options = {
+    "style_nav_header_background": "#2980B9",  
+    "collapse_navigation": False,              
+    "navigation_depth": 3,                     
+}
+
 templates_path = ['_templates']
 exclude_patterns = []
 
