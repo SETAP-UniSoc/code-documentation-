@@ -14,12 +14,13 @@ release = '1.0'
 
 # -- General configuration ---------------------------------------------------
 
-extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
-]
+html_theme = "sphinx_rtd_theme"
 
+extensions = [
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.napoleon",
+]
 templates_path = ['_templates']
 exclude_patterns = []
 

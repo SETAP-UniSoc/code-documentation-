@@ -19,29 +19,40 @@ The system is composed of:
 - Redis and Celery for background processing
 
 Contents
---------
+========
 
 .. toctree::
    :maxdepth: 2
-   :caption: Documentation:
+   :caption: Documentation
 
    scope
    requirements
    implementation
    setup
-   components
-   usage
-   api
-   backend/User_Registration
-   backend/User_Login
-   backend/User_Homepage
-   backend/User_MySocietypage
-   backend/User_MyEventspage
-   backend/User_Settingspage
-   backend/Event_Detailspage
-   backend/Admin_Eventspage
+
+
+Backend
+=======
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Backend Pages
+
    backend/Admin_Analyticspage
+   backend/Admin_Eventspage
+   backend/Event_Detailspage
+   backend/User_Homepage
+   backend/User_Login
+   backend/User_MyEventspage
+   backend/User_MySocietypage
+   backend/User_Registration
+   backend/User_Settingspage
 
 
+API
+===
 
+.. toctree::
+   :maxdepth: 1
 
+   api
