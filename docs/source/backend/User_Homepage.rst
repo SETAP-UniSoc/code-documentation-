@@ -10,9 +10,10 @@ and searchable societies.
 Endpoint
 --------
 
-.. code-block:: http
+.. code-block:: python
 
-   POST /api/login/
+   path('events/all/', AllEventsView.as_view(), name='all-events')
+   path("search/", SocietyListSearchView.as_view(), name="society-search")
 
 Authentication 
 --------------
