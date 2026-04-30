@@ -4,7 +4,9 @@ User Registration
 Overview
 --------
 
-Allows new users and admins to create an account.
+This endpoint allows a new user to register an account in the system.
+It validates user input, enforces password strength rules, and ensures
+unique email and university number.
 
 Endpoint
 --------

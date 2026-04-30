@@ -4,7 +4,8 @@ User Login
 Overview
 --------
 
-Authenticates a user and returns a token.
+Authenticates a user using email or university number and returns
+an authentication token.
 
 Endpoint
 --------
