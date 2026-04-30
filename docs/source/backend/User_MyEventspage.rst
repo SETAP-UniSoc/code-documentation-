@@ -9,11 +9,11 @@ Allows users to view, join, and leave events.
 Endpoints
 ---------
 
-.. code-block:: http
+.. code-block:: python
 
-   GET /api/my-events/
-   POST /api/join-event/{id}/
-   POST /api/leave-event/{id}/
+   path('events/my/', MyEventsView.as_view(), name='my-events')
+   path('events/<int:event_id>/join/', JoinEventView.as_view(), name='join-event')
+   path('events/<int:event_id>/leave/', LeaveEventView.as_view(), name='leave-event')
 
 Authentication
 --------------

@@ -11,9 +11,9 @@ unique email and university number.
 Endpoint
 --------
 
-.. code-block:: http
+.. code-block:: python
 
-   POST /api/register/
+   path("user/register/", RegisterView.as_view(), name="register")
 
 Authentication
 --------------

@@ -10,9 +10,9 @@ including attendance data.
 Endpoint
 --------
 
-.. code-block:: http
+.. code-block:: python
 
-   GET /api/events/{id}/
+   path('events/<int:event_id>/', EventDetailView.as_view(), name='event-detail')
 
 Authentication
 --------------
