@@ -1,20 +1,25 @@
 Project Scope
 =============
 
-This project aims to develop a system for University Students of Portsmouth University so they can access all society information.
+This project aims to develop a digital platform for students at the University
+of Portsmouth to discover, join, and engage with university societies.
 
-The system includes:
-- User side 
-- Admin side 
-- Event information
-- Live Analytics for admin society managment 
-- Featured and Top Societies 
-- Event Creation and Deletion 
-- Event and Society Browsing 
+The system provides both user-facing and administrative functionality,
+supporting the full lifecycle of society and event management.
 
+Key Features
+------------
+
+- Society discovery and browsing
+- Event creation and participation
+- User authentication and profile management
+- Real-time notifications
+- Attendance tracking and analytics
 
 Objectives
 ----------
-- Improve Society engagement 
-- Track society engagement for admins 
-- Make Society events more accessible 
+
+- Improve student engagement in university societies
+- Provide administrators with actionable insights
+- Simplify event organisation and participation
+- Centralise society-related information in one platform
