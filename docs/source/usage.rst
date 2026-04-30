@@ -1,34 +1,33 @@
-Usage
-=====
+Usage Guide
+===========
 
-.. _installation:
+This section describes how to interact with the system.
 
-Installation
-------------
+User Workflow
+-------------
 
-To use Lumache, first install it using pip:
+1. Register an account
+2. Log into the system
+3. Browse available societies
+4. Join societies of interest
+5. View and attend events
 
-.. code-block:: console
+Admin Workflow
+--------------
 
-   (.venv) $ pip install lumache
+1. Log into admin account
+2. Create or manage societies
+3. Create and manage events
+4. Monitor attendance and engagement
 
-Creating recipes
-----------------
+API Interaction
+---------------
 
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
+The frontend communicates with the backend via REST APIs.
 
-.. autofunction:: lumache.get_random_ingredients
+Example:
 
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
+.. code-block:: bash
 
-.. autoexception:: lumache.InvalidKindError
-
-For example:
-
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
-
+   GET /api/societies/
+   POST /api/events/
