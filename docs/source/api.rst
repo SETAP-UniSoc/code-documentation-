@@ -1,27 +1,15 @@
 API Documentation
 =================
 
-.. autosummary::
-   :toctree: generated
+This section documents the backend API endpoints.
 
-   backend.authentication.views
-   backend.authentication.models
-   backend.authentication.serializer
+Modules
+-------
 
-Views
------
+- Authentication (Login, Register)
+- Events Management
+- Society Management
+- Notifications
+- Analytics
 
-.. automodule:: backend.authentication.views
-   :members:
-
-Models
-------
-
-.. automodule:: backend.authentication.models
-   :members:
-
-Serializers
------------
-
-.. automodule:: backend.authentication.serializer
-   :members:
+For full endpoint details, see the Backend Documentation section.
