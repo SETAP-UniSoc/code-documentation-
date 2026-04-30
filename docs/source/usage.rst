@@ -1,34 +1,32 @@
-Usage
-=====
+Usage Guide
+===========
 
-.. _installation:
+This section explains how to use the UniSoc system.
 
-Installation
-------------
+User Features
+-------------
 
-To use Lumache, first install it using pip:
+- Register and log into the system
+- Browse and join societies
+- View upcoming events
+- Receive notifications
 
-.. code-block:: console
+Admin Features
+--------------
 
-   (.venv) $ pip install lumache
+- Create and manage societies
+- Create and manage events
+- Track attendance
+- Manage users
 
-Creating recipes
-----------------
+API Usage
+---------
 
-To retrieve a list of random ingredients,
-you can use the ``lumache.get_random_ingredients()`` function:
+The frontend communicates with the backend using REST API endpoints.
 
-.. autofunction:: lumache.get_random_ingredients
+Example:
 
-The ``kind`` parameter should be either ``"meat"``, ``"fish"``,
-or ``"veggies"``. Otherwise, :py:func:`lumache.get_random_ingredients`
-will raise an exception.
+.. code-block:: bash
 
-.. autoexception:: lumache.InvalidKindError
-
-For example:
-
->>> import lumache
->>> lumache.get_random_ingredients()
-['shells', 'gorgonzola', 'parsley']
-
+   GET /api/societies/
+   POST /api/events/
