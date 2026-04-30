@@ -9,11 +9,11 @@ Allows users to view and manage societies they are part of.
 Endpoints
 ---------
 
-.. code-block:: http
+.. code-block:: python
 
-   GET /api/my-societies/
-   POST /api/join-society/{id}/
-   POST /api/leave-society/{id}/
+   path("my-societies/", MySocietiesView.as_view(), name="my-societies")
+   path("society/<int:society_id>/join/", JoinSocietyView.as_view(), name="join-society")
+   path("society/<int:society_id>/leave/", LeaveSocietyView.as_view(), name="leave-society")
 
 Authentication
 --------------
