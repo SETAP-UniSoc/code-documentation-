@@ -33,6 +33,6 @@ autosummary_generate = False
 html_theme = 'alabaster'  # simple and safe (works on ReadTheDocs)
 
 # If you want nicer UI later, you can switch to:
-# html_theme = 'sphinx_rtd_theme'
+# html_theme = 'sphinx_rtd_theme' seeing if this syncs to github
 
 html_static_path = ['_static']

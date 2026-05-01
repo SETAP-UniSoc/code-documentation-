@@ -114,4 +114,3 @@ Looks up the event using the ``id`` field.
 
 API view to delete an event created by the authenticated user.
 Admins can only delete events they created themselves.
-
