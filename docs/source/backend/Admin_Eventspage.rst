@@ -11,6 +11,7 @@ Endpoints
 ---------
 
 .. code-block:: python
+
     path('events/<int:event_id>/update/', UpdateEventView.as_view(), name='update-event')
     path('events/<int:event_id>/delete/', DeleteEventView.as_view(), name='delete-event')
 
