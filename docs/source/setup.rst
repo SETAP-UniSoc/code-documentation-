@@ -23,17 +23,34 @@ Installation
 
 .. code-block:: bash
 
-   git clone https://github.com/your-repo
-   cd your-repo
+   git clone https://github.com/Unisoc
+   cd Unisoc
 
-Backend Setup
--------------
+-----------------------------------
+Backend Setup (Django REST Framework)
+-----------------------------------
+
+1. Create virtual environment:
 
 .. code-block:: bash
 
    python -m venv venv
    source venv/bin/activate
    pip install -r requirements.txt
+
+3. Configure PostgreSQL database:
+
+Update your database settings in ``settings.py``:
+
+- Database name: unisoc_db
+- User: unisoc_user
+- Password: strongpassword
+
+4. Apply migrations:
+
+.. code-block:: bash
+
+   python manage.py makemigrations
    python manage.py migrate
    python manage.py runserver
 
