@@ -27,8 +27,8 @@ Clone the repository:
 
 .. code-block:: bash
 
-   git clone https://github.com/your-repo
-   cd your-repo
+   git clone https://github.com/Unisoc
+   cd Unisoc
 
 -----------------------------------
 Backend Setup (Django REST Framework)
@@ -60,6 +60,7 @@ Update your database settings in ``settings.py``:
 
 .. code-block:: bash
 
+   python manage.py makemigrations
    python manage.py migrate
 
 5. Create superuser:
