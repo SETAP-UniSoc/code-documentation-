@@ -295,12 +295,3 @@ Implementation Notes
 
 ---
 
-Suggested Improvements
-----------------------
-
-- Add pagination for large society lists
-- Include member count in response
-- Add role within society (e.g. member, admin)
-- Add notifications when joining/leaving
-- Prevent joining inactive societies
-- Add audit logging for membership changes

@@ -238,11 +238,3 @@ Use Cases
 - Event engagement analysis
 - Identifying popular events
 
-Suggested Improvements
-----------------------
-
-- Remove duplicate fields
-- Optimise database queries
-- Add optional date range filters
-- Implement caching (e.g. Redis)
-- Include event IDs in responses

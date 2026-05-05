@@ -238,13 +238,3 @@ Implementation Notes
 - Results are lightweight for fast frontend rendering
 
 ---
-
-Suggested Improvements
-----------------------
-
-- Add pagination for large society lists
-- Implement debounce/throttling on frontend (already done in your UI)
-- Add category-based filtering
-- Include society images/logos in response
-- Add trending or recommended societies
-- Cache frequent search queries for performance

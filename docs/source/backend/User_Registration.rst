@@ -248,12 +248,3 @@ Security Considerations
 - No sensitive data is returned in responses
 
 ---
-
-Suggested Improvements
-----------------------
-
-- Add email verification step
-- Implement CAPTCHA to prevent bot registrations
-- Add rate limiting to prevent abuse
-- Return authentication token upon registration
-- Move validation logic to serializers for cleaner design

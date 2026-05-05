@@ -152,11 +152,3 @@ Implementation Notes
 - Relies on ``EventSerializer`` for response structure
 - Can be extended to include nested relationships (e.g. society details, attendees)
 
-Suggested Improvements
-----------------------
-
-- Include nested society details instead of only ID
-- Add attendee count directly in response
-- Include user-specific attendance status (joined/not joined)
-- Add caching for frequently accessed events
-- Support public/private event visibility rules

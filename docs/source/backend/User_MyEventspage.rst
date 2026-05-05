@@ -288,13 +288,3 @@ Implementation Notes
 - Time-based validation ensures logical consistency
 
 ---
-
-Suggested Improvements
-----------------------
-
-- Add capacity limit validation before joining
-- Return updated attendee count on leave
-- Add waitlist functionality for full events
-- Include user attendance status in event responses
-- Add pagination for large event lists
-- Send notifications when joining/leaving events

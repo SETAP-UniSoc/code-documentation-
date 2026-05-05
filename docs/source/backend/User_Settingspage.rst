@@ -427,13 +427,3 @@ Security Considerations
 - Access is restricted to authenticated users
 - Membership validation prevents unauthorized preference changes
 
----
-
-Suggested Improvements
-----------------------
-
-- Add password strength validation (same as registration)
-- Implement email verification on change
-- Add profile picture support
-- Add notification types (email, push, SMS)
-- Log account changes for auditing

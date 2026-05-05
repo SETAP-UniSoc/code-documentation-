@@ -592,12 +592,3 @@ Implementation Notes
 - Confirmation email/function triggered on event creation
 - Querysets are scoped per user for security
 
-Suggested Improvements
-----------------------
-
-- Add pagination for event listings
-- Include event IDs in all responses (if not already)
-- Add soft delete instead of permanent deletion
-- Introduce event status (draft, published, cancelled)
-- Add validation for date/time conflicts
-- Log admin actions for audit tracking
