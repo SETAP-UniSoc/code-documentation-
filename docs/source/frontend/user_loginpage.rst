@@ -262,3 +262,13 @@ network request is skipped entirely.
  
    No further client-side validation (format, length semantics, password
    strength) is performed. All deeper validation is delegated to the backend.
+  
+----
+
+
+8. API Integration
+------------------
+ 
+.. list-table::
+   :widths: 22 78
+   :header-rows: 1
