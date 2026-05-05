@@ -285,3 +285,5 @@ network request is skipped entirely.
   - ``{"up_number": "<digits>", "password": "<password>"}``
 * - Timeout
   - 10 seconds
+* - Success Response
+  - ``HTTP 200`` — ``{"token": "<auth_token>", "role": ..., "email": ..., ...}``
