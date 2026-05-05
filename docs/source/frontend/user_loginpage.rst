@@ -287,3 +287,11 @@ network request is skipped entirely.
   - 10 seconds
 * - Success Response
   - ``HTTP 200`` — ``{"token": "<auth_token>", "role": ..., "email": ..., ...}``
+
+8.1 Token Storage
+~~~~~~~~~~~~~~~~~~
+ 
+On success the token string from ``responseData["token"]`` is written to the
+static field ``ApiService.authToken``. This value is then automatically
+included as ``Authorization: Token <authToken>`` in the headers map for all
+subsequent authenticated requests via ``ApiService.headers``.
