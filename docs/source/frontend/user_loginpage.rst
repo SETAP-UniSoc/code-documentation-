@@ -308,5 +308,10 @@ subsequent authenticated requests via ``ApiService.headers``.
 * - Trigger
   - Destination Screen
   - Method
+* - Successful login (``HTTP 200``)
+  - ``HomePage``
+  - ``Navigator.pushReplacement`` (removes login screen from stack)
+
+
 
 
