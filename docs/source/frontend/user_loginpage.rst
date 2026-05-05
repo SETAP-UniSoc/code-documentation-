@@ -314,6 +314,10 @@ subsequent authenticated requests via ``ApiService.headers``.
 * - ``"Forgot Password?"`` tapped
   - ``ForgottenPasswordScreen``
   - ``Navigator.push``
+* - ``"Signup"`` tapped
+  - ``SignupUserPage``
+  - ``Navigator.push``
+
 
 
 
