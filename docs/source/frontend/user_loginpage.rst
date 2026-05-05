@@ -281,3 +281,5 @@ network request is skipped entirely.
   - ``${ApiService.baseUrl}/login/`` → ``http://10.128.5.248:8000/api/login/``
 * - Headers
   - ``Content-Type: application/json``
+* - Request Body
+  - ``{"up_number": "<digits>", "password": "<password>"}``
