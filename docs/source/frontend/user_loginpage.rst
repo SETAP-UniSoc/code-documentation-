@@ -295,3 +295,13 @@ On success the token string from ``responseData["token"]`` is written to the
 static field ``ApiService.authToken``. This value is then automatically
 included as ``Authorization: Token <authToken>`` in the headers map for all
 subsequent authenticated requests via ``ApiService.headers``.
+
+----
+
+9. Navigation Map
+-----------------
+ 
+.. list-table::
+   :widths: 35 30 35
+   :header-rows: 1
+
