@@ -322,5 +322,14 @@ subsequent authenticated requests via ``ApiService.headers``.
   - ``Navigator.push``
 
 
+----
 
 
+10. Error Handling Summary
+--------------------------
+ 
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+ 
+ 
