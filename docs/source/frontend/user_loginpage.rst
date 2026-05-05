@@ -246,3 +246,6 @@ Constructs and returns the widget tree. Returns a ``Scaffold`` with an
 - ``LengthLimitingTextInputFormatter(7)`` — enforces a maximum of 7 digits.
 - The prefix ``"UP"`` is displayed via ``prefixText`` but is **not** part of
   the stored controller value.
+- The raw numeric string is sent to the backend; the ``LoginView`` on the
+  backend prepends ``"up"`` if absent and lowercases the result.
+ 
