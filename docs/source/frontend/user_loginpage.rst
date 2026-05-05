@@ -279,3 +279,5 @@ network request is skipped entirely.
   - ``POST``
 * - URL
   - ``${ApiService.baseUrl}/login/`` → ``http://10.128.5.248:8000/api/login/``
+* - Headers
+  - ``Content-Type: application/json``
