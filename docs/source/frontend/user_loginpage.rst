@@ -256,3 +256,9 @@ Constructs and returns the widget tree. Returns a ``Scaffold`` with an
  
 Both fields must be non-empty; otherwise ``_showError`` is called and the
 network request is skipped entirely.
+
+
+.. note::
+ 
+   No further client-side validation (format, length semantics, password
+   strength) is performed. All deeper validation is delegated to the backend.
