@@ -248,4 +248,11 @@ Constructs and returns the widget tree. Returns a ``Scaffold`` with an
   the stored controller value.
 - The raw numeric string is sent to the backend; the ``LoginView`` on the
   backend prepends ``"up"`` if absent and lowercases the result.
+
+
+
+7.2 Client-Side Pre-submission Check
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
+Both fields must be non-empty; otherwise ``_showError`` is called and the
+network request is skipped entirely.
