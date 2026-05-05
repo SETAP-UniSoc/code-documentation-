@@ -273,3 +273,9 @@ network request is skipped entirely.
    :widths: 22 78
    :header-rows: 1
 
+* - Field
+  - Value
+* - Method
+  - ``POST``
+* - URL
+  - ``${ApiService.baseUrl}/login/`` → ``http://10.128.5.248:8000/api/login/``

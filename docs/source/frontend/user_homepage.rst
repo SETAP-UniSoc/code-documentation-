@@ -192,3 +192,5 @@ to on tap.
 A styled card displaying event title, date, and location. Used inside the
 upcoming events carousel. Navigation is handled by the parent ``GestureDetector``
 in the ``itemBuilder``.
+
+
