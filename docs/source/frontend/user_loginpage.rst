@@ -305,3 +305,8 @@ subsequent authenticated requests via ``ApiService.headers``.
    :widths: 35 30 35
    :header-rows: 1
 
+* - Trigger
+  - Destination Screen
+  - Method
+
+
