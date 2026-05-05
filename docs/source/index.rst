@@ -48,6 +48,19 @@ Backend
    backend/User_Registration
    backend/User_Settingspage
 
+Frontend
+=======
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Frontend Pages
+
+   frontend/user_homepage
+   frontend/user_loginpage
+
+
+
 
 API
 ===
