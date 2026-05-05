@@ -317,6 +317,9 @@ subsequent authenticated requests via ``ApiService.headers``.
 * - ``"Signup"`` tapped
   - ``SignupUserPage``
   - ``Navigator.push``
+* - ``"Admin"`` tapped
+  - ``LoginScreenAdmin``
+  - ``Navigator.push``
 
 
 
