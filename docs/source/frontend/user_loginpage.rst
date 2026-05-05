@@ -283,3 +283,5 @@ network request is skipped entirely.
   - ``Content-Type: application/json``
 * - Request Body
   - ``{"up_number": "<digits>", "password": "<password>"}``
+* - Timeout
+  - 10 seconds
