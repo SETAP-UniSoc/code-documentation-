@@ -311,7 +311,9 @@ subsequent authenticated requests via ``ApiService.headers``.
 * - Successful login (``HTTP 200``)
   - ``HomePage``
   - ``Navigator.pushReplacement`` (removes login screen from stack)
-
+* - ``"Forgot Password?"`` tapped
+  - ``ForgottenPasswordScreen``
+  - ``Navigator.push``
 
 
 
