@@ -231,13 +231,3 @@ Security Considerations
 - No sensitive data (e.g. passwords) is returned in responses
 - Generic error messages prevent user enumeration attacks
 
----
-
-Suggested Improvements
-----------------------
-
-- Add rate limiting to prevent brute-force attacks
-- Implement account lockout after multiple failed attempts
-- Support refresh tokens or JWT authentication
-- Add multi-factor authentication (MFA)
-- Log login attempts for auditing
