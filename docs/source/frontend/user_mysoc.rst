@@ -29,3 +29,23 @@ No arguments are required to construct it.
      context,
      MaterialPageRoute(builder: (_) => const MySocietyPage()),
    );
+
+
+   
+   **Route out of this page**
+ 
+Tapping a society card pushes ``UserSocietyPage``, passing three named arguments:
+ 
+.. code-block:: dart
+ 
+   Navigator.push(
+     context,
+     MaterialPageRoute(
+       builder: (_) => UserSocietyPage(
+         societyId: id,
+         societyName: name,
+         description: description,
+       ),
+     ),
+   );
+ 
