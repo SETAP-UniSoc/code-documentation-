@@ -12,3 +12,20 @@ The page is implemented as the ``MySocietyPage`` stateful widget, found at
 ``lib/screens/user_mysoc_page.dart``.
  
 ---
+
+
+
+Navigation
+----------
+ 
+**Route into this page**
+ 
+``MySoc`` is typically reached from the main bottom navigation bar or home screen.
+No arguments are required to construct it.
+ 
+.. code-block:: dart
+ 
+   Navigator.push(
+     context,
+     MaterialPageRoute(builder: (_) => const MySocietyPage()),
+   );
