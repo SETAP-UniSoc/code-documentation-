@@ -247,3 +247,19 @@ Endpoint: ``POST /api/user/register/``
 guarded by ``mounted`` checks.
  
 ---
+
+AppBar
+------
+ 
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+ 
+   * - Property
+     - Value
+   * - ``title``
+     - ``"User Signup"``.
+   * - Style
+     - Default — inherits the app theme.
+ 
+---
