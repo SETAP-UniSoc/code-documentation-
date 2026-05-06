@@ -107,4 +107,51 @@ UI States
  
 The page uses a ``FutureBuilder`` to handle three possible states:
  
+Loading
+~~~~~~~
+ 
+Displayed while the network request is in flight.
+ 
+::
+ 
+   ┌──────────────────────────────────┐
+   │          My Societies            │  ← AppBar
+   ├──────────────────────────────────┤
+   │                                  │
+   │        [CircularProgressIndicator]│
+   │                                  │
+   └──────────────────────────────────┘
+ 
+Error
+~~~~~
+ 
+Displayed if the ``Future`` throws an exception (e.g. network failure or non-200 response).
+The error message from the exception is shown centred on screen.
+ 
+::
+ 
+   ┌──────────────────────────────────┐
+   │          My Societies            │
+   ├──────────────────────────────────┤
+   │                                  │
+   │   Error: Failed to load my       │
+   │   societies: 401 Unauthorized    │
+   │                                  │
+   └──────────────────────────────────┘
+ 
+Empty state
+~~~~~~~~~~~
+ 
+Displayed when the request succeeds but the user has not joined any societies.
+ 
+::
+ 
+   ┌──────────────────────────────────┐
+   │          My Societies            │
+   ├──────────────────────────────────┤
+   │                                  │
+   │  You have not joined any         │
+   │  societies yet.                  │
+   │                                  │
+   └──────────────────────────────────┘
  
