@@ -404,3 +404,38 @@ Leaving an event is handled by the private method ``_leaveEvent(int eventId)``.
 All ``setState`` and ``ScaffoldMessenger`` calls are guarded by ``_isMounted`` checks.
  
 ---
+
+
+Date Formatting
+---------------
+ 
+Two helpers are used to display dates in a human-readable format.
+ 
+``_formatDate``
+~~~~~~~~~~~~~~~
+ 
+Converts an ISO 8601 string to local time and formats it as ``"D Mon YYYY at HH:MM"``.
+ 
+.. code-block:: dart
+ 
+   _formatDate("2025-06-01T14:00:00Z") // → "1 Jun 2025 at 15:00"
+ 
+``_getMonthAbbreviation``
+~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Returns a three-letter month name from a 1-based month integer.
+ 
+.. code-block:: dart
+ 
+   _getMonthAbbreviation(6) // → "Jun"
+ 
+``_monthName``
+~~~~~~~~~~~~~~
+ 
+Returns an uppercase three-letter month abbreviation. Used for date badge rendering.
+ 
+.. code-block:: dart
+ 
+   _monthName("6") // → "JUN"
+ 
+---
