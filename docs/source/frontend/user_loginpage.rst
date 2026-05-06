@@ -372,3 +372,19 @@ subsequent authenticated requests via ``ApiService.headers``.
      - Stores the token returned from a successful login response
  
 ----
+
+
+ 
+12. Known Limitations & Notes
+------------------------------
+ 
+- The base URL (``10.128.5.248:8000``) is hardcoded in ``ApiService``. This
+  must be changed before deploying to a production environment, or replaced
+  with environment-specific configuration.
+- Debug ``print`` statements (HTTP status / body, error logs) are present and
+  should be removed or gated behind a debug flag before release builds.
+- There is no client-side persistence of the auth token; closing the app
+  requires the user to log in again. Consider integrating
+  ``flutter_secure_storage`` or ``shared_preferences`` for token persistence.
+- The ``"UP"`` prefix shown in the UI is cosmetic only; the backend normalises
+  the value independently in ``LoginView``
