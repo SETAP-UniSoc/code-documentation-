@@ -321,4 +321,23 @@ Event Detail Body
      - ``Icons.people`` (purple) + ``"Capacity: <limit>"``. Hidden when ``null``.
    * - Leave button
      - Full-width ``ElevatedButton.icon``. See below.
+
+
+Leave Event Button
+~~~~~~~~~~~~~~~~~~
+ 
+.. list-table::
+   :widths: 20 40 40
+   :header-rows: 1
+ 
+   * - State
+     - Appearance
+     - Behaviour
+   * - Upcoming event
+     - Red text and icon (``Colors.red``), red-tinted background
+       (``Colors.red.shade50``), red border (``Colors.red.shade200``).
+     - Calls ``_leaveEvent(event["id"])``.
+   * - Past event
+     - Grey text and icon, grey background (``Colors.grey.shade100``), grey border.
+     - Disabled (``onPressed: null``). Label reads ``"Event Passed"``.
  
