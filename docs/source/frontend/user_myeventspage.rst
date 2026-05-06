@@ -14,3 +14,49 @@ The page is implemented as the ``MyEventsPage`` stateful widget, found at
 ---
 
 
+Navigation
+----------
+ 
+**Route into this page — single society mode**
+ 
+When navigated to from a society page, a ``societyId`` is passed to scope the list to
+events from that society only.
+ 
+.. code-block:: dart
+ 
+   Navigator.push(
+     context,
+     MaterialPageRoute(
+       builder: (_) => MyEventsPage(societyId: societyId),
+     ),
+   );
+ 
+**Route into this page — all societies mode**
+ 
+When navigated to from the bottom navigation bar or home screen, no ``societyId`` is
+passed. The page fetches attending events across all societies.
+ 
+.. code-block:: dart
+ 
+   Navigator.push(
+     context,
+     MaterialPageRoute(
+       builder: (_) => const MyEventsPage(),
+     ),
+   );
+ 
+**Constructor properties**
+ 
+.. list-table::
+   :widths: 25 15 60
+   :header-rows: 1
+ 
+   * - Property
+     - Type
+     - Description
+   * - ``societyId``
+     - ``int?``
+     - Optional. If provided, only events from this society are shown.
+       If ``null``, attending events from all societies are fetched.
+ 
+---
