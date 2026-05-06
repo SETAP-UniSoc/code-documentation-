@@ -60,6 +60,7 @@ Frontend
    frontend/user_loginpage
    frontend/user_mysoc
    frontend/user_myeventspage   
+   frontend/user_signup
 
 
 API
