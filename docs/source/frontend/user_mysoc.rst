@@ -100,4 +100,11 @@ single piece of state:
        mock function to return fixture data without hitting the network.
  
 ---
+
+
+UI States
+---------
+ 
+The page uses a ``FutureBuilder`` to handle three possible states:
+ 
  
