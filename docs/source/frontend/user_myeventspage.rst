@@ -349,3 +349,26 @@ Leave Event Button
    final isPast = startTime.isBefore(DateTime.now());
  
 ---
+
+AppBar
+------
+ 
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+ 
+   * - Property
+     - Value
+   * - ``title``
+     - ``"My Events"``, ``FontWeight.w600``.
+   * - ``backgroundColor``
+     - ``Colors.white``.
+   * - ``foregroundColor``
+     - ``Colors.black``.
+   * - ``elevation``
+     - ``0`` (no shadow).
+   * - ``automaticallyImplyLeading``
+     - ``true`` — back arrow shown when pushed onto a navigation stack.
+ 
+---
+
