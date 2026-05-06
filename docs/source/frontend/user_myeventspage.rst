@@ -174,3 +174,66 @@ When ``societyId`` is ``null``:
    "location":    event["location"]    ?? "No location",
  
 ---
+
+
+UI States
+---------
+ 
+Loading
+~~~~~~~
+ 
+Shown while ``_isLoading`` is ``true``.
+ 
+::
+ 
+   ┌──────────────────────────────────┐
+   │           My Events              │  ← AppBar
+   ├──────────────────────────────────┤
+   │                                  │
+   │     [CircularProgressIndicator]  │
+   │                                  │
+   └──────────────────────────────────┘
+ 
+Error
+~~~~~
+ 
+Shown when ``_errorMessage`` is not ``null``. Includes a **Try Again** button that
+re-calls ``_loadMyAttendingEvents``.
+ 
+::
+ 
+   ┌──────────────────────────────────┐
+   │           My Events              │
+   ├──────────────────────────────────┤
+   │                                  │
+   │    [!]  <error message>          │
+   │                                  │
+   │         [ Try Again ]            │
+   │                                  │
+   └──────────────────────────────────┘
+ 
+- Error icon: ``Icons.error_outline``, size 64, colour ``Colors.grey``.
+- Try Again button background: ``Color(0xFF8B5CF6)`` (purple).
+ 
+Empty State
+~~~~~~~~~~~
+ 
+Shown when the request succeeds but the user is not attending any events.
+ 
+::
+ 
+   ┌──────────────────────────────────┐
+   │           My Events              │
+   ├──────────────────────────────────┤
+   │                                  │
+   │  [calendar_busy icon]            │
+   │                                  │
+   │  You're not attending any        │
+   │  events yet                      │
+   │                                  │
+   │  Go to a society page and        │
+   │  tap 'Attend Event'              │
+   │                                  │
+   └──────────────────────────────────┘
+ 
+- Empty icon: ``Icons.event_busy``, size 64, colour ``Colors.grey``.
