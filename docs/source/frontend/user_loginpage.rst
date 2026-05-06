@@ -331,5 +331,24 @@ subsequent authenticated requests via ``ApiService.headers``.
 .. list-table::
    :widths: 30 70
    :header-rows: 1
+
+   * - Scenario
+     - Handling
+   * - Empty fields
+     - ``_showError`` called immediately; no network request fired
+   * - Widget disposed mid-request
+     - ``mounted`` checked after ``await``; all UI updates skipped if ``false``
+   * - ``HTTP 401``
+     - ``_showError("Incorrect password")``
+   * - ``HTTP 404``
+     - ``_showError("UP number not found")``
+   * - Other HTTP error
+     - ``_showError("Login failed (<statusCode>)")``
+   * - ``TimeoutException``
+     - User-facing ``SnackBar`` + console log of timeout details
+   * - Generic exception
+     - ``_showError("Network or server error")`` + console log via ``print``
+   * - ``finally`` block
+     - ``isLoading`` reset to ``false`` regardless of outcome (if mounted)
  
- 
+
