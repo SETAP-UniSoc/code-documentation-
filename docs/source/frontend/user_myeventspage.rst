@@ -372,3 +372,35 @@ AppBar
  
 ---
 
+Leave Event Action
+------------------
+ 
+Leaving an event is handled by the private method ``_leaveEvent(int eventId)``.
+ 
+.. code-block:: dart
+ 
+   Future<void> _leaveEvent(int eventId) async {
+     final response = await http.post(
+       Uri.parse("${ApiService.baseUrl}/events/$eventId/leave/"),
+       headers: ApiService.headers,
+     );
+     ...
+   }
+ 
+**On success (200)**
+ 
+- Removes the event from ``_myEvents`` using ``removeWhere``.
+- Shows a green ``SnackBar``: ``"You have left the event"``.
+ 
+**On failure (non-200)**
+ 
+- Shows a red ``SnackBar`` with the ``error`` field from the response body,
+  falling back to ``"Failed to leave event"``.
+ 
+**On exception**
+ 
+- Shows a red ``SnackBar``: ``"Error leaving event"``.
+ 
+All ``setState`` and ``ScaffoldMessenger`` calls are guarded by ``_isMounted`` checks.
+ 
+---
