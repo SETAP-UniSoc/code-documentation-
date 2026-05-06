@@ -268,3 +268,9 @@ with 16 px padding and 20 px bottom margin between cards.
    └──────────────────────────────────┘
  
 ---
+
+Event Card
+----------
+ 
+Each card is a ``Container`` with a white background, rounded corners (``16 px``),
+a subtle box shadow, and a ``Colors.grey.shade200`` border.
