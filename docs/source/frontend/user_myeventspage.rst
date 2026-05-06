@@ -341,3 +341,11 @@ Leave Event Button
      - Grey text and icon, grey background (``Colors.grey.shade100``), grey border.
      - Disabled (``onPressed: null``). Label reads ``"Event Passed"``.
  
+ **Past event detection**
+ 
+.. code-block:: dart
+ 
+   final startTime = DateTime.parse(event["start_time"]);
+   final isPast = startTime.isBefore(DateTime.now());
+ 
+---
