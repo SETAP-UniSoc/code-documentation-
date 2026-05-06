@@ -284,3 +284,22 @@ While ``isLoading`` is ``true``, the button is replaced with a
        ),
  
 ---
+
+
+Error Handling
+--------------
+ 
+All user-facing errors are shown through ``_showError``, which displays a ``SnackBar``
+in the current context:
+ 
+.. code-block:: dart
+ 
+   void _showError(String message) {
+     ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(content: Text(message)),
+     );
+   }
+ 
+This is used for both validation failures and API error responses.
+ 
+---
