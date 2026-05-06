@@ -227,3 +227,75 @@ AppBar
      - ``Color(0xFF4A235A)`` — the app's primary brand purple.
  
 ---
+
+
+ 
+Data Fetching
+-------------
+ 
+The page calls a single endpoint on load.
+ 
+.. list-table::
+   :widths: 20 80
+   :header-rows: 0
+ 
+   * - **Method**
+     - ``GET``
+   * - **URL**
+     - ``/api/my-societies/``
+   * - **Auth**
+     - Token header — set automatically via ``ApiService.headers``.
+ 
+The service method used is ``ApiService.getMySocieties``:
+ 
+.. code-block:: dart
+ 
+   static Future<List> getMySocieties() async {
+     final response = await http.get(
+       Uri.parse("$baseUrl/my-societies/"),
+       headers: headers,
+     );
+ 
+     if (response.statusCode == 200) {
+       return jsonDecode(response.body) as List;
+     }
+ 
+     throw Exception(
+       "Failed to load my societies: ${response.statusCode} ${response.body}",
+     );
+   }
+ 
+**Expected response shape**
+ 
+Each item in the returned list is a ``Map<String, dynamic>`` with these keys used by the UI:
+ 
+.. list-table::
+   :widths: 20 15 65
+   :header-rows: 1
+ 
+   * - Key
+     - Dart type
+     - Used for
+   * - ``id``
+     - ``int``
+     - Passed to ``UserSocietyPage`` as ``societyId``.
+   * - ``name``
+     - ``String``
+     - Card title and passed to ``UserSocietyPage`` as ``societyName``.
+   * - ``description``
+     - ``String``
+     - Card subtitle line 1 and passed to ``UserSocietyPage`` as ``description``.
+   * - ``member_count``
+     - ``int``
+     - Card subtitle line 2 (member count label).
+ 
+Values are accessed with null-safe fallbacks:
+ 
+.. code-block:: dart
+ 
+   final id          = soc['id']           as int?    ?? 0;
+   final name        = soc['name']         as String? ?? '';
+   final description = soc['description']  as String? ?? '';
+   final memberCount = soc['member_count'] as int?    ?? 0;
+ 
+---
