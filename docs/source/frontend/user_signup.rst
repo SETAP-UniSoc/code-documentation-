@@ -263,3 +263,24 @@ AppBar
      - Default — inherits the app theme.
  
 ---
+
+
+Submit Button
+-------------
+ 
+While ``isLoading`` is ``false``, the page shows an ``ElevatedButton`` labelled
+``"Signup"`` that calls ``signupUser()``.
+ 
+While ``isLoading`` is ``true``, the button is replaced with a
+``CircularProgressIndicator``.
+ 
+.. code-block:: dart
+ 
+   isLoading
+     ? const CircularProgressIndicator()
+     : ElevatedButton(
+         onPressed: signupUser,
+         child: const Text("Signup"),
+       ),
+ 
+---
