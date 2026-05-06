@@ -60,3 +60,38 @@ passed. The page fetches attending events across all societies.
        If ``null``, attending events from all societies are fetched.
  
 ---
+
+
+Widget Structure
+----------------
+ 
+``MyEventsPage`` is a ``StatefulWidget``. Its state class ``_MyEventsPageState`` manages
+the following fields:
+ 
+.. list-table::
+   :widths: 30 15 55
+   :header-rows: 1
+ 
+   * - Field
+     - Type
+     - Description
+   * - ``_myEvents``
+     - ``List<Map<String, dynamic>>``
+     - The list of events the user is attending. Populated by ``_loadMyAttendingEvents``.
+   * - ``_isLoading``
+     - ``bool``
+     - ``true`` while the network requests are in progress.
+   * - ``_errorMessage``
+     - ``String?``
+     - Holds an error string if any request fails. ``null`` on success.
+   * - ``_isMounted``
+     - ``bool``
+     - Guards all ``setState`` calls after async gaps. Set to ``false`` in ``dispose``
+       to prevent calling ``setState`` on an unmounted widget.
+ 
+**Lifecycle**
+ 
+- ``initState`` — calls ``_loadMyAttendingEvents`` immediately on widget creation.
+- ``dispose`` — sets ``_isMounted = false`` before calling ``super.dispose()``.
+ 
+---
