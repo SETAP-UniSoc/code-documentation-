@@ -303,3 +303,14 @@ in the current context:
 This is used for both validation failures and API error responses.
  
 ---
+
+
+Endpoint Used
+-------------
+ 
+- ``POST /api/user/register/``
+ 
+No auth token is required — this endpoint is publicly accessible. Headers are set
+directly on the request rather than using ``ApiService.headers``.
+ 
+---
