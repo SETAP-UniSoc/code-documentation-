@@ -111,3 +111,66 @@ When ``societyId`` is provided:
 2. For each event, calls ``GET /api/events/<eventId>/attending/`` to check if
    ``is_attending`` is ``true``.
 3. Builds ``_myEvents`` from only the events where the user is attending.
+
+
+All Societies Mode
+~~~~~~~~~~~~~~~~~~
+ 
+When ``societyId`` is ``null``:
+ 
+1. Fetches all societies via ``GET /api/societies/``.
+2. For each society, fetches its events via ``GET /api/societies/<societyId>/events/``.
+3. For each event, calls ``GET /api/events/<eventId>/attending/`` to check attendance.
+4. Collects all attending events and **sorts them ascending by ``start_time``**.
+ 
+.. note::
+   All Societies mode makes multiple sequential HTTP requests (one per society, then one
+   per event). For users in many societies with many events this may be slow. A loading
+   indicator is shown for the full duration.
+ 
+**Event map structure stored in ``_myEvents``**
+ 
+.. list-table::
+   :widths: 25 15 60
+   :header-rows: 1
+ 
+   * - Key
+     - Type
+     - Present in
+   * - ``id``
+     - ``int``
+     - Both modes
+   * - ``title``
+     - ``String``
+     - Both modes
+   * - ``description``
+     - ``String``
+     - Both modes
+   * - ``location``
+     - ``String``
+     - Both modes
+   * - ``start_time``
+     - ``String`` (ISO 8601)
+     - Both modes
+   * - ``end_time``
+     - ``String`` (ISO 8601)
+     - Both modes
+   * - ``capacity_limit``
+     - ``int?``
+     - Both modes
+   * - ``society_id``
+     - ``int``
+     - All societies mode only
+   * - ``society_name``
+     - ``String``
+     - All societies mode only
+ 
+**Null-safe fallbacks applied on load**
+ 
+.. code-block:: dart
+ 
+   "title":       event["title"]       ?? "Untitled Event",
+   "description": event["description"] ?? "No description",
+   "location":    event["location"]    ?? "No location",
+ 
+---
