@@ -59,6 +59,7 @@ Frontend
    frontend/user_homepage
    frontend/user_loginpage
    frontend/user_mysoc
+   frontend/user_myeventspage   
 
 
 API
