@@ -274,3 +274,28 @@ Event Card
  
 Each card is a ``Container`` with a white background, rounded corners (``16 px``),
 a subtle box shadow, and a ``Colors.grey.shade200`` border.
+
+
+
+Society Header (all-societies mode only)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Rendered when the event map contains the key ``society_name``. Appears at the top of
+the card with a light purple background (``Color(0xFF8B5CF6)`` at 10% opacity).
+ 
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+ 
+   * - Element
+     - Detail
+   * - Society icon
+     - ``Icons.business`` in a purple-to-blue gradient ``Container`` (40 × 40 px,
+       border radius 10 px).
+   * - Society name
+     - ``FontWeight.w600``, size 16, colour ``Color(0xFF1F2937)``.
+   * - Date line
+     - Formatted start time, size 12, colour ``Colors.grey.shade600``.
+   * - Past badge
+     - Shown when ``start_time`` is before ``DateTime.now()``. Grey pill labelled
+       ``"Past"``.
