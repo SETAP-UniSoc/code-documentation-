@@ -209,3 +209,21 @@ Each list item is a ``ListTile`` with the following layout:
    '$memberCount member${memberCount == 1 ? '' : 's'}'
  
 ---
+
+
+
+AppBar
+------
+ 
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+ 
+   * - Property
+     - Value
+   * - ``title``
+     - ``'My Societies'`` in white (``Colors.white``).
+   * - ``backgroundColor``
+     - ``Color(0xFF4A235A)`` — the app's primary brand purple.
+ 
+---
