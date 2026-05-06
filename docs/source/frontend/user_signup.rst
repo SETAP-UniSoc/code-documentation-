@@ -183,3 +183,67 @@ on the first failing rule, stopping further checks.
    but the 7-digit exact-length rule is enforced again in ``_validateFields`` as a safety check.
  
 ---
+
+
+ 
+Signup Action
+-------------
+ 
+The signup is handled by the async method ``signupUser()``.
+ 
+**Step 1 — validate**
+ 
+Calls ``_validateFields()``. Returns early without a network call if validation fails.
+ 
+**Step 2 — build UP number**
+ 
+Prefixes the user's 7-digit input with ``"UP"`` before sending:
+ 
+.. code-block:: dart
+ 
+   final upnumber = "UP${upnumberController.text.trim()}";
+ 
+**Step 3 — POST to the API**
+ 
+.. code-block:: dart
+ 
+   final response = await http.post(
+     Uri.parse("http://10.128.4.160:8000/api/user/register/"),
+     headers: {
+       "Content-Type": "application/json",
+       "Accept": "application/json",
+     },
+     body: jsonEncode({
+       "first_name": firstNameController.text.trim(),
+       "last_name":  lastNameController.text.trim(),
+       "up_number":  upnumber,
+       "email":      emailController.text.trim(),
+       "password":   passwordController.text,
+       "confirm_password": confirmPasswordController.text,
+     }),
+   );
+ 
+Endpoint: ``POST /api/user/register/``
+ 
+**Step 4 — handle response**
+ 
+.. list-table::
+   :widths: 15 85
+   :header-rows: 1
+ 
+   * - Status
+     - Behaviour
+   * - 200 or 201
+     - Shows a green ``SnackBar``: ``"Signup successful"``. Navigates to
+       ``LoginScreenUser`` via ``pushReplacement``.
+   * - Any other status
+     - Attempts to decode the body and read ``error``, ``message``, or ``detail``
+       fields. Falls back to ``"Signup failed (<status code>)"`` if none are present.
+       Displays the message in a ``SnackBar``.
+   * - Network exception
+     - Shows ``"Network error: <exception message>"`` in a ``SnackBar``.
+ 
+``isLoading`` is set to ``false`` in a ``finally`` block, and all state updates are
+guarded by ``mounted`` checks.
+ 
+---
