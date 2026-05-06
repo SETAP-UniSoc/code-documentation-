@@ -102,3 +102,12 @@ Data Loading
 All data fetching is handled by the private method ``_loadMyAttendingEvents``. The method
 branches on whether ``widget.societyId`` is set.
  
+Single Society Mode
+~~~~~~~~~~~~~~~~~~~
+ 
+When ``societyId`` is provided:
+ 
+1. Fetches all events for that society via ``GET /api/societies/<societyId>/events/``.
+2. For each event, calls ``GET /api/events/<eventId>/attending/`` to check if
+   ``is_attending`` is ``true``.
+3. Builds ``_myEvents`` from only the events where the user is attending.
