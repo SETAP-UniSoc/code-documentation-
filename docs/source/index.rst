@@ -58,8 +58,7 @@ Frontend
 
    frontend/user_homepage
    frontend/user_loginpage
-
-
+   frontend/user_mysoc
 
 
 API
