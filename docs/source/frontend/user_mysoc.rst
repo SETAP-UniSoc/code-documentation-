@@ -362,3 +362,29 @@ can be replaced in widget tests without mocking ``http``.
    });
  
 ---
+
+
+
+Page Flow
+---------
+ 
+::
+ 
+   [Bottom Nav / Home]
+         │
+         ▼
+   MySocietyPage
+         │
+         │  GET /api/my-societies/
+         │
+         ├── Loading  →  CircularProgressIndicator
+         ├── Error    →  Error message (centred)
+         ├── Empty    →  "You have not joined any societies yet."
+         │
+         └── [tap card]
+                  │
+                  ▼
+           UserSocietyPage
+           (societyId, societyName, description)
+ 
+---
