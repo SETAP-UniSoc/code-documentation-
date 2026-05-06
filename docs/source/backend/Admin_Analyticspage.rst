@@ -4,18 +4,21 @@ Admin Analytics
 Overview
 --------
 
-Provides analytical insights for society administrators.
+The **Admin Analytics API** provides analytical insights for society administrators.
+It aggregates membership trends, event engagement, and overall activity into a
+single endpoint for dashboard visualisation.
 
-Features
---------
-
-- Membership growth tracking
-- Event attendance statistics
-- Most popular event
-- Live member count
+This endpoint is designed to support admin dashboards with time-series data and
+summary statistics.
 
 Endpoint
 --------
+
+.. code-block:: http
+
+   GET /api/my-analytics/
+
+**Django Route**
 
 .. code-block:: python
 
@@ -24,119 +27,214 @@ Endpoint
 Authentication
 --------------
 
-- Required (Admin only)
+- **Required**: Yes
+- **Access Level**: Admin users only
 
-Parameters
-----------
+Authorization Rules
+~~~~~~~~~~~~~~~~~~~
 
-- week
-- month
-- 6months
-- year
+- User must have ``role = "admin"``
+- User must be associated with a society
 
-Implementation
---------------
+Error Responses
+~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Status Code
+     - Description
+   * - 403
+     - User is not an admin
+   * - 404
+     - No society found for admin
+
+Query Parameters
+----------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - Parameter
+     - Type
+     - Default
+     - Description
+   * - period
+     - string
+     - week
+     - Time range for analytics aggregation
+
+Allowed Values
+~~~~~~~~~~~~~~
+
+- ``week`` → Last 7 days (daily breakdown)
+- ``month`` → Last 30 days (daily breakdown)
+- ``6months`` → Last 6 months (weekly breakdown)
+- ``year`` → Last 12 months (monthly breakdown)
+
+Example Request
+~~~~~~~~~~~~~~~
+
+.. code-block:: http
+
+   GET /api/my-analytics/?period=month
+
+Response Structure
+------------------
+
+.. code-block:: json
+
+   {
+     "labels": ["Mon", "Tue", "Wed"],
+     "totals": [10, 15, 18],
+     "live_count": 120,
+     "total_events": 25,
+     "events_stats": [
+       { "title": "Welcome Event", "attendee_count": 50 }
+     ],
+     "most_popular": {
+       "title": "Welcome Event",
+       "attendee_count": 50
+     },
+     "event_attendance": [
+       { "title": "Welcome Event", "attendee_count": 50 }
+     ]
+   }
+
+Response Fields Explained
+------------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Field
+     - Description
+   * - ``labels``
+     - Time intervals (e.g. days, weeks, months)
+   * - ``totals``
+     - Membership count at each interval
+   * - ``live_count``
+     - Current active members
+   * - ``total_events``
+     - Total number of events created
+   * - ``events_stats``
+     - Attendance count per event
+   * - ``most_popular``
+     - Event with highest attendance (or null)
+   * - ``event_attendance``
+     - Duplicate of ``events_stats`` (for frontend compatibility)
+
+Data Flow & Logic
+-----------------
+
+Membership Growth
+~~~~~~~~~~~~~~~~~
+
+Membership totals are calculated using:
+
+- ``joined_at <= current_date``
+- ``left_at IS NULL OR left_at > current_date``
+
+This ensures historical accuracy and correct handling of users who have left.
+
+Time Bucketing Strategy
+~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 20 40
+
+   * - Period
+     - Interval
+     - Data Points
+     - Label Format
+   * - week
+     - Daily
+     - 7
+     - Mon, Tue
+   * - month
+     - Daily
+     - 30
+     - 01 Jan
+   * - 6months
+     - Weekly
+     - 26
+     - Week 12
+   * - year
+     - Monthly
+     - 12
+     - Jan
+
+Event Analytics
+~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
-   class AnalyticsView(APIView):
+   Count("eventattendance", filter=Q(eventattendance__left_at__isnull=True))
 
-    permission_classes = [IsAuthenticated]
+Only active attendees are counted.
 
-    def get(self, request):
+Most Popular Event
+~~~~~~~~~~~~~~~~~~
 
-        if request.user.role != "admin":
-            return Response({"error": "Admins only"}, status=403)
+- Determined by highest attendee count
+- Returns a single event
+- Returns ``null`` if no events exist
 
-        period = request.query_params.get("period", "week")
+Implementation Notes
+--------------------
 
-        try:
-            society = Society.objects.get(admin=request.user)
-        except Society.DoesNotExist:
-            return Response({"error": "Society not found"}, status=404)
+Duplicate Query
+~~~~~~~~~~~~~~~
 
-        now = timezone.now()
+.. code-block:: python
 
-        # Decide grouping & range
-        if period == "week":
-            days_range = 7
-            delta = timedelta(days=1)
-            label_format = "%a"  # Mon Tue Wed
-        elif period == "month":
-            days_range = 30
-            delta = timedelta(days=1)
-            label_format = "%d %b"
-        elif period == "6months":
-            days_range = 26
-            delta = timedelta(weeks=1)
-            label_format = "Week %W"
-        elif period == "year":
-            days_range = 12
-            delta = timedelta(days=30)
-            label_format = "%b"
-        else:
-            return Response({"error": "Invalid period"}, status=400)
+   society = Society.objects.get(admin=request.user)
 
-        start_date = now - (delta * days_range)
+This appears twice and should be reused to avoid unnecessary database calls.
 
-        labels = []
-        totals = []
+Redundant Field
+~~~~~~~~~~~~~~~
 
-        current_date = start_date
+.. code-block:: json
 
-        for _ in range(days_range):
+   "event_attendance": list(events_stats)
 
-            total = Membership.objects.filter(
-                society=society,
-                joined_at__lte=current_date
-            ).filter(
-                Q(left_at__isnull=True) | Q(left_at__gt=current_date)
-            ).count()
+Duplicates ``events_stats`` and may be removed unless required by the frontend.
 
-            labels.append(current_date.strftime(label_format))
-            totals.append(total)
+Performance Considerations
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            current_date += delta
+- Membership calculation runs one query per time interval
+- Event annotations are executed multiple times
+- Consider optimisation using aggregation or caching
 
-        society = Society.objects.get(admin=request.user) # gets admis society
-        total_events = society.events.count() # total events in that society
-        events_stats = society.events.annotate(
-            attendee_count = Count(
-                "eventattendance",
-                filter = Q(eventattendance__left_at__isnull=True)
-            )
-        ).values("title", "attendee_count")
+Edge Cases
+----------
 
-        #most popular event
-        most_popular = society.events.annotate(
-            attendee_count = Count(
-                "eventattendance",
-                filter = Q(eventattendance__left_at__isnull=True)
-            )
-        ).order_by("-attendee_count").values("title", "attendee_count").first()
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
 
-        live_count = Membership.objects.filter(
-            society=society,
-            left_at__isnull=True
-        ).count()
+   * - Scenario
+     - Behaviour
+   * - No society exists
+     - Returns 404
+   * - No events
+     - ``most_popular = null``
+   * - No members
+     - ``totals`` contains zeros
+   * - Invalid period
+     - Returns 400
 
-        return Response({
-            "labels": labels,
-            "totals": totals,
-            "live_count": live_count,
-            "total_events": total_events,
-            "events_stats": list(events_stats),
-            "most_popular": most_popular,
-            "event_attendance": list(events_stats)
-        })
+Use Cases
+---------
 
-API view to provide analytics for a society admin.
-Includes:
-    - Membership growth over time
-    - Total active members
-    - Total events
-    - Event attendance statistics
-    - Most popular event
+- Admin dashboard visualisation
+- Membership growth tracking
+- Event engagement analysis
+- Identifying popular events
 
-Query Parameters:
-    - period: 'week', 'month', '6months', 'year'
