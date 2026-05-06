@@ -144,3 +144,42 @@ Wraps a ``TextField`` in a ``Padding`` with 12 px bottom spacing.
    }
  
 ---
+
+
+Client-Side Validation
+----------------------
+ 
+All validation runs inside ``_validateFields()`` before any network call is made.
+Errors are shown via ``SnackBar`` (see `Error Handling`_). The method returns ``false``
+on the first failing rule, stopping further checks.
+ 
+.. list-table::
+   :widths: 40 60
+   :header-rows: 1
+ 
+   * - Rule
+     - Error message shown
+   * - All fields non-empty
+     - ``"Please fill in all fields"``
+   * - UP number matches ``^\d{7}$`` (exactly 7 digits)
+     - ``"UP number must be exactly 7 digits"``
+   * - Email matches ``^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$``
+     - ``"Enter a valid email address"``
+   * - Password equals confirm password
+     - ``"Passwords do not match"``
+   * - Password length ≥ 8 characters
+     - ``"Password must be at least 8 characters"``
+   * - Password length ≤ 20 characters
+     - ``"Password must not exceed 20 characters"``
+   * - Password contains at least one uppercase letter (``[A-Z]``)
+     - ``"Password must contain one uppercase letter"``
+   * - Password contains at least one digit (``\d``)
+     - ``"Password must contain one number"``
+   * - Password contains at least one special character (``[^\w\s]``)
+     - ``"Password must contain one special character"``
+ 
+.. note::
+   The UP number field accepts only digits at the keyboard level (``FilteringTextInputFormatter``),
+   but the 7-digit exact-length rule is enforced again in ``_validateFields`` as a safety check.
+ 
+---
