@@ -41,3 +41,48 @@ is replaced so the user cannot navigate back to the signup form.
  
 ---
 
+
+Widget Structure
+----------------
+ 
+``SignupUserPage`` is a ``StatefulWidget``. Its state class ``_SignupUserPageState``
+manages the following:
+ 
+**Controllers**
+ 
+One ``TextEditingController`` per input field:
+ 
+.. list-table::
+   :widths: 35 65
+   :header-rows: 1
+ 
+   * - Controller
+     - Field
+   * - ``firstNameController``
+     - First name text input.
+   * - ``lastNameController``
+     - Last name text input.
+   * - ``upnumberController``
+     - UP number digits input (numbers only, max 7 digits).
+   * - ``emailController``
+     - Email address input.
+   * - ``passwordController``
+     - Password input (obscured).
+   * - ``confirmPasswordController``
+     - Confirm password input (obscured).
+ 
+**State fields**
+ 
+.. list-table::
+   :widths: 25 15 60
+   :header-rows: 1
+ 
+   * - Field
+     - Type
+     - Description
+   * - ``isLoading``
+     - ``bool``
+     - ``true`` while the signup request is in flight. Replaces the submit button
+       with a ``CircularProgressIndicator``.
+ 
+---
