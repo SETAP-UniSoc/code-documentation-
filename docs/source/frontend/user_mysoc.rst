@@ -155,3 +155,24 @@ Displayed when the request succeeds but the user has not joined any societies.
    │                                  │
    └──────────────────────────────────┘
  
+Populated list
+~~~~~~~~~~~~~~
+ 
+Displayed when the user has one or more active memberships. Societies are rendered in a
+vertically scrolling ``ListView`` with 12 px spacing between cards.
+ 
+::
+ 
+   ┌──────────────────────────────────┐
+   │          My Societies            │
+   ├──────────────────────────────────┤
+   │  ●  Photography Society          │
+   │     A community for enthusiasts  │
+   │     42 members              >    │
+   ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┤
+   │  ●  Chess Club                   │
+   │     Weekly sessions              │
+   │     15 members              >    │
+   └──────────────────────────────────┘
+ 
+---
