@@ -299,3 +299,66 @@ Values are accessed with null-safe fallbacks:
    final memberCount = soc['member_count'] as int?    ?? 0;
  
 ---
+
+
+
+
+Testing
+-------
+ 
+``MySocietyPage`` accepts an optional ``mySocietiesFetcher`` parameter so the network call
+can be replaced in widget tests without mocking ``http``.
+ 
+**Example: empty state test**
+ 
+.. code-block:: dart
+ 
+   testWidgets('shows empty state when no societies', (tester) async {
+     await tester.pumpWidget(
+       MaterialApp(
+         home: MySocietyPage(
+           mySocietiesFetcher: () async => [],
+         ),
+       ),
+     );
+     await tester.pumpAndSettle();
+     expect(find.text('You have not joined any societies yet.'), findsOneWidget);
+   });
+ 
+**Example: populated list test**
+ 
+.. code-block:: dart
+ 
+   testWidgets('renders a card for each society', (tester) async {
+     await tester.pumpWidget(
+       MaterialApp(
+         home: MySocietyPage(
+           mySocietiesFetcher: () async => [
+             {'id': 1, 'name': 'Chess Club', 'description': 'Weekly chess.', 'member_count': 10},
+             {'id': 2, 'name': 'Film Soc',   'description': 'Movie nights.',  'member_count': 5},
+           ],
+         ),
+       ),
+     );
+     await tester.pumpAndSettle();
+     expect(find.text('Chess Club'), findsOneWidget);
+     expect(find.text('Film Soc'),   findsOneWidget);
+   });
+ 
+**Example: error state test**
+ 
+.. code-block:: dart
+ 
+   testWidgets('shows error message on failure', (tester) async {
+     await tester.pumpWidget(
+       MaterialApp(
+         home: MySocietyPage(
+           mySocietiesFetcher: () async => throw Exception('Network error'),
+         ),
+       ),
+     );
+     await tester.pumpAndSettle();
+     expect(find.textContaining('Error:'), findsOneWidget);
+   });
+ 
+---
