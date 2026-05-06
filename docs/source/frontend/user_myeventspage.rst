@@ -95,3 +95,10 @@ the following fields:
 - ``dispose`` — sets ``_isMounted = false`` before calling ``super.dispose()``.
  
 ---
+
+Data Loading
+------------
+ 
+All data fetching is handled by the private method ``_loadMyAttendingEvents``. The method
+branches on whether ``widget.societyId`` is set.
+ 
