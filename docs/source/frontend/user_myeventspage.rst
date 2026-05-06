@@ -464,3 +464,42 @@ All requests use ``ApiService.headers``, which includes the ``Authorization: Tok
 header automatically.
  
 ---
+
+
+Page Flow
+---------
+ 
+::
+ 
+   [Bottom Nav / Society Page]
+           │
+           ├─ societyId provided?
+           │        │
+           │       Yes ──► Single Society Mode
+           │        │        │
+           │        │        │  GET /api/societies/<id>/events/
+           │        │        │  GET /api/events/<id>/attending/  (per event)
+           │        │        │
+           │       No  ──► All Societies Mode
+           │                 │
+           │                 │  GET /api/societies/
+           │                 │  GET /api/societies/<id>/events/  (per society)
+           │                 │  GET /api/events/<id>/attending/  (per event)
+           │                 │  sort ascending by start_time
+           │
+           ▼
+       MyEventsPage
+           │
+           ├── Loading      →  CircularProgressIndicator
+           ├── Error        →  Error message + Try Again button
+           ├── Empty        →  "You're not attending any events yet"
+           └── Populated    →  ListView of event cards
+                                    │
+                                    └── [Leave Event]
+                                             │
+                                             POST /api/events/<id>/leave/
+                                             │
+                                             ├── 200  →  Remove card + green SnackBar
+                                             └── 4xx  →  Red SnackBar with error
+ 
+---
