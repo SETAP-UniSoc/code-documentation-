@@ -439,3 +439,28 @@ Returns an uppercase three-letter month abbreviation. Used for date badge render
    _monthName("6") // → "JUN"
  
 ---
+
+
+
+Endpoints Used
+--------------
+ 
+.. list-table::
+   :widths: 10 45 45
+   :header-rows: 1
+ 
+   * - Method
+     - URL
+   * - ``GET``
+     - ``/api/societies/``
+   * - ``GET``
+     - ``/api/societies/<societyId>/events/``
+   * - ``GET``
+     - ``/api/events/<eventId>/attending/``
+   * - ``POST``
+     - ``/api/events/<eventId>/leave/``
+ 
+All requests use ``ApiService.headers``, which includes the ``Authorization: Token <token>``
+header automatically.
+ 
+---
