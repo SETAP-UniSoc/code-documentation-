@@ -49,3 +49,20 @@ Tapping a society card pushes ``UserSocietyPage``, passing three named arguments
      ),
    );
  
+
+.. list-table::
+   :widths: 25 15 60
+   :header-rows: 1
+ 
+   * - Argument
+     - Type
+     - Description
+   * - ``societyId``
+     - ``int``
+     - The unique ID of the selected society.
+   * - ``societyName``
+     - ``String``
+     - Display name passed directly to avoid a second network call.
+   * - ``description``
+     - ``String``
+     - Society description passed directly to avoid a second network call.
