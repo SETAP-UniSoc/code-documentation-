@@ -314,3 +314,41 @@ No auth token is required — this endpoint is publicly accessible. Headers are 
 directly on the request rather than using ``ApiService.headers``.
  
 ---
+
+
+
+Page Flow
+---------
+ 
+::
+ 
+   LoginScreenUser
+         │
+         │  [tap Signup button]
+         │
+         ▼
+   SignupUserPage
+         │
+         │  User fills in all fields
+         │
+         │  [tap Signup]
+         │
+         ├── _validateFields() fails
+         │         │
+         │         └── SnackBar with validation error
+         │             (stays on SignupUserPage)
+         │
+         └── _validateFields() passes
+                   │
+                   │  POST /api/user/register/
+                   │
+                   ├── 200 / 201  →  SnackBar "Signup successful"
+                   │                 pushReplacement → LoginScreenUser
+                   │
+                   ├── 4xx / 5xx  →  SnackBar with error from response body
+                   │                 (stays on SignupUserPage)
+                   │
+                   └── Exception  →  SnackBar "Network error: ..."
+                                     (stays on SignupUserPage)
+ 
+---
