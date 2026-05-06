@@ -86,3 +86,61 @@ One ``TextEditingController`` per input field:
        with a ``CircularProgressIndicator``.
  
 ---
+
+Form Fields
+-----------
+ 
+The form is rendered inside a ``SingleChildScrollView`` to accommodate smaller screens.
+All fields use ``UnderlineInputBorder`` styling.
+ 
+.. list-table::
+   :widths: 25 20 55
+   :header-rows: 1
+ 
+   * - Label
+     - Input type
+     - Notes
+   * - First Name
+     - Text
+     - Built with ``_buildField``. No special keyboard or formatter.
+   * - Last Name
+     - Text
+     - Built with ``_buildField``. No special keyboard or formatter.
+   * - UP Number
+     - Number
+     - ``keyboardType: TextInputType.number``. Accepts digits only
+       (``FilteringTextInputFormatter.digitsOnly``). Hard-capped at 7 digits
+       (``LengthLimitingTextInputFormatter(7)``). Displays a ``prefixText`` of ``"UP"``
+       so the user only types the numeric portion.
+   * - Email
+     - Text
+     - Built with ``_buildField``.
+   * - Password
+     - Text (obscured)
+     - Built with ``_buildField(obscure: true)``.
+   * - Confirm Password
+     - Text (obscured)
+     - Built with ``_buildField(obscure: true)``.
+ 
+**``_buildField`` helper**
+ 
+Wraps a ``TextField`` in a ``Padding`` with 12 px bottom spacing.
+ 
+.. code-block:: dart
+ 
+   Widget _buildField(TextEditingController controller, String label,
+       {bool obscure = false}) {
+     return Padding(
+       padding: const EdgeInsets.only(bottom: 12),
+       child: TextField(
+         controller: controller,
+         obscureText: obscure,
+         decoration: InputDecoration(
+           labelText: label,
+           border: const UnderlineInputBorder(),
+         ),
+       ),
+     );
+   }
+ 
+---
