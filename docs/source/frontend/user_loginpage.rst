@@ -352,3 +352,23 @@ subsequent authenticated requests via ``ApiService.headers``.
      - ``isLoading`` reset to ``false`` regardless of outcome (if mounted)
  
 
+----
+ 
+11. Dependencies
+----------------
+ 
+11.1 ``ApiService`` (``services/api_services.dart``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+ 
+   * - Member
+     - Usage in ``LoginScreenUser``
+   * - ``ApiService.baseUrl``
+     - Constructs the login endpoint URI
+   * - ``ApiService.authToken``
+     - Stores the token returned from a successful login response
+ 
+----
