@@ -66,3 +66,38 @@ Tapping a society card pushes ``UserSocietyPage``, passing three named arguments
    * - ``description``
      - ``String``
      - Society description passed directly to avoid a second network call.
+ 
+----
+
+Widget Structure
+----------------
+ 
+``MySocietyPage`` is a ``StatefulWidget``. Its state class ``_MySocietyPageState`` holds a
+single piece of state:
+ 
+.. list-table::
+   :widths: 30 70
+   :header-rows: 1
+ 
+   * - Field
+     - Description
+   * - ``_futureMySocieties``
+     - A ``Future<List>`` initialised in ``initState`` by calling ``ApiService.getMySocieties``
+       (or the injected ``mySocietiesFetcher`` override). Consumed by ``FutureBuilder``.
+ 
+**Constructor properties**
+ 
+.. list-table::
+   :widths: 30 15 55
+   :header-rows: 1
+ 
+   * - Property
+     - Type
+     - Description
+   * - ``mySocietiesFetcher``
+     - ``Future<List> Function()?``
+     - Optional. Overrides the default fetch function. Intended for widget testing — pass a
+       mock function to return fixture data without hitting the network.
+ 
+---
+ 
