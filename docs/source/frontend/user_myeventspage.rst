@@ -299,3 +299,26 @@ the card with a light purple background (``Color(0xFF8B5CF6)`` at 10% opacity).
    * - Past badge
      - Shown when ``start_time`` is before ``DateTime.now()``. Grey pill labelled
        ``"Past"``.
+
+Event Detail Body
+~~~~~~~~~~~~~~~~~
+ 
+.. list-table::
+   :widths: 25 75
+   :header-rows: 1
+ 
+   * - Element
+     - Detail
+   * - Title
+     - ``FontWeight.bold``, size 18, colour ``Color(0xFF1F2937)``.
+   * - Date row
+     - ``Icons.calendar_today`` (purple) + formatted start time.
+   * - Location row
+     - ``Icons.location_on`` (purple) + location string.
+   * - Description
+     - Shown only when non-empty, separated by a ``Divider``. Line height 1.5.
+   * - Capacity
+     - ``Icons.people`` (purple) + ``"Capacity: <limit>"``. Hidden when ``null``.
+   * - Leave button
+     - Full-width ``ElevatedButton.icon``. See below.
+ 
