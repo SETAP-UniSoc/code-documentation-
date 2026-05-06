@@ -176,3 +176,36 @@ vertically scrolling ``ListView`` with 12 px spacing between cards.
    └──────────────────────────────────┘
  
 ---
+
+
+
+Society Card
+------------
+ 
+Each list item is a ``ListTile`` with the following layout:
+ 
+.. list-table::
+   :widths: 20 80
+   :header-rows: 1
+ 
+   * - Slot
+     - Content
+   * - ``leading``
+     - ``CircleAvatar`` with background colour ``Color(0xFF4A235A)`` and a white ``Icons.group`` icon.
+   * - ``title``
+     - Society name. Font weight ``FontWeight.w600``.
+   * - ``subtitle``
+     - Two lines: the society description on line one, and the member count on line two
+       (e.g. ``42 members`` or ``1 member`` — singular/plural handled automatically).
+   * - ``isThreeLine``
+     - ``true``, to accommodate the two-line subtitle.
+   * - ``onTap``
+     - Pushes ``UserSocietyPage`` with the society's ``id``, ``name``, and ``description``.
+ 
+**Member count label logic**
+ 
+.. code-block:: dart
+ 
+   '$memberCount member${memberCount == 1 ? '' : 's'}'
+ 
+---
