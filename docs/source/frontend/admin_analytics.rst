@@ -389,3 +389,24 @@ Error Handling Summary
  
 ---
  
+
+Live Update Behaviour
+---------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+ 
+   * - Behaviour
+     - Detail
+   * - Update interval
+     - Every 50 seconds via ``Timer.periodic``.
+   * - What updates
+     - Full re-fetch of ``fetchAnalytics(selectedPeriod)`` — all chart data, live count, and event stats are refreshed.
+   * - Timer lifecycle
+     - Started in ``initState``, cancelled in ``dispose``. Safe against memory leaks.
+   * - Period awareness
+     - The timer always uses the current value of ``selectedPeriod``, so switching tabs is reflected in the next tick.
+ 
+---
+ 
