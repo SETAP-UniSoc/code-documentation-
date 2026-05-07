@@ -233,3 +233,36 @@ Generates an in-memory PDF document using the ``pdf`` package and sends it to th
  
 ---
  
+ 
+UI Sections
+-----------
+ 
+Period Selector
+~~~~~~~~~~~~~~~
+ 
+A horizontal row of four ``_buildPeriodButton`` widgets at the top of the page:
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 15 15 70
+ 
+   * - Label
+     - Value
+     - Behaviour on tap
+   * - 1W
+     - ``"week"``
+     - Sets ``selectedPeriod = "week"`` and calls ``fetchAnalytics("week")``.
+   * - 1M
+     - ``"month"``
+     - Sets ``selectedPeriod = "month"`` and calls ``fetchAnalytics("month")``.
+   * - 6M
+     - ``"6months"``
+     - Sets ``selectedPeriod = "6months"`` and calls ``fetchAnalytics("6months")``.
+   * - 1Y
+     - ``"year"``
+     - Sets ``selectedPeriod = "year"`` and calls ``fetchAnalytics("year")``.
+ 
+The active button is shown in purple with a 2px underline indicator. Inactive buttons are grey with no indicator.
+ 
+---
+ 
