@@ -408,3 +408,49 @@ Error Handling Summary
  
 ---
 
+
+
+Navigation
+----------
+ 
+``AdminEventsPage`` is reached via ``AdminBottomNav`` at index 2:
+ 
+.. code-block:: dart
+ 
+   case 2:
+     Navigator.pushReplacement(
+       context,
+       MaterialPageRoute(
+         builder: (_) => AdminEventsPage(
+           societyId: ApiService.societyId ?? 1,
+         ),
+       ),
+     );
+ 
+The page itself sets ``automaticallyImplyLeading: false`` on its ``AppBar``, meaning no back arrow is shown — navigation is handled entirely through the bottom nav bar.
+ 
+---
+ 
+Dependencies
+------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+ 
+   * - Dependency
+     - Role
+   * - ``package:flutter/material.dart``
+     - Core Flutter widgets and dialogs.
+   * - ``package:flutter_calenders/flutter_calenders.dart``
+     - Provides the ``EventBasedCalender`` widget and ``Event`` model used for calendar rendering.
+   * - ``package:http/http.dart``
+     - HTTP client for all API calls.
+   * - ``dart:convert``
+     - JSON encoding and decoding.
+   * - ``package:unisoc/services/api_services.dart``
+     - Provides ``ApiService.baseUrl`` and ``ApiService.headers``.
+   * - ``package:unisoc/screens/admin/admin_bottom_nav.dart``
+     - Bottom navigation bar rendered at ``currentIndex: 2``.
+ 
+---
