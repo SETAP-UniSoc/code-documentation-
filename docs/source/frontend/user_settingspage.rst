@@ -210,3 +210,76 @@ Fetches the authenticated user's profile. On success, populates ``_userName`` an
 **On failure:** Displays the HTTP status code in a ``SnackBar``.
  
 ---
+
+
+
+``_updateEmail()``
+~~~~~~~~~~~~~~~~~~
+ 
+**Endpoint:** ``POST /api/change-email/``
+ 
+**Request body:**
+ 
+.. code-block:: json
+ 
+   { "new_email": "<new_email>" }
+ 
+**Validation:** Rejects empty email strings before making the API call.
+ 
+**On success:** Updates ``_userEmail`` and clears the input field.
+ 
+**On failure:** Parses ``error`` from the response body if available, otherwise shows a generic message.
+ 
+**Common error responses from the backend:**
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+ 
+   * - Status
+     - Meaning
+   * - ``400``
+     - Email already in use, or new email field is missing.
+   * - ``401``
+     - User is not authenticated.
+ 
+---
+ 
+``_changePassword()``
+~~~~~~~~~~~~~~~~~~~~~
+ 
+**Endpoint:** ``POST /api/change-password/``
+ 
+**Request body:**
+ 
+.. code-block:: json
+ 
+   {
+     "old_password": "<current_password>",
+     "new_password": "<new_password>"
+   }
+ 
+**Client-side validation (in order):**
+ 
+1. Both ``currentPassword`` and ``newPassword`` must be non-empty.
+2. ``newPassword`` must be at least 8 characters.
+3. ``newPassword`` must match ``confirmPassword``.
+ 
+If any check fails, a descriptive ``SnackBar`` is shown and no API call is made.
+ 
+**On success:** Clears all three password fields.
+ 
+**Common error responses from the backend:**
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+ 
+   * - Status
+     - Meaning
+   * - ``400``
+     - Old password incorrect, or new password too short.
+   * - ``401``
+     - User is not authenticated.
+ 
+---
