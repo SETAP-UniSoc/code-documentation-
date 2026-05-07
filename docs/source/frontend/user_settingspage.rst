@@ -37,3 +37,66 @@ Widget Structure
        └── _updateSingleNotification()   → POST /notifications/
  
 ---
+
+
+
+
+
+ 
+State Variables
+---------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 30 15 55
+ 
+   * - Variable
+     - Type
+     - Description
+   * - ``_nameController``
+     - ``TextEditingController``
+     - Controls the name input field.
+   * - ``_newEmailController``
+     - ``TextEditingController``
+     - Controls the new email input field.
+   * - ``_currentPasswordController``
+     - ``TextEditingController``
+     - Controls the current password input field.
+   * - ``_newPasswordController``
+     - ``TextEditingController``
+     - Controls the new password input field.
+   * - ``_confirmPasswordController``
+     - ``TextEditingController``
+     - Controls the confirm password input field.
+   * - ``_isEditingName``
+     - ``bool``
+     - Toggles between display and edit mode for the name field.
+   * - ``_isLoading``
+     - ``bool``
+     - Controls the full-page loading spinner.
+   * - ``_notificationsEnabled``
+     - ``bool``
+     - Tracks whether the first society's notifications are enabled.
+   * - ``_notificationPrefs``
+     - ``List<Map<String, dynamic>>``
+     - List of per-society notification preference objects.
+   * - ``_obscureCurrentPassword``
+     - ``bool``
+     - Toggles password visibility for the current password field.
+   * - ``_obscureNewPassword``
+     - ``bool``
+     - Toggles password visibility for the new password field.
+   * - ``_obscureConfirmPassword``
+     - ``bool``
+     - Toggles password visibility for the confirm password field.
+   * - ``_userName``
+     - ``String``
+     - The user's display name loaded from the API.
+   * - ``_userEmail``
+     - ``String``
+     - The user's email address loaded from the API.
+   * - ``_errorMessage``
+     - ``String``
+     - Error message shown in the UI when profile loading fails.
+ 
+---
