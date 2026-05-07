@@ -133,5 +133,103 @@ Cancels the live update timer to prevent memory leaks and dangling callbacks:
  
 ---
  
-
+Methods
+-------
+ 
+``startLiveUpdates()``
+~~~~~~~~~~~~~~~~~~~~~~
+ 
+Creates a ``Timer.periodic`` that calls ``fetchAnalytics(selectedPeriod)`` every 50 seconds. This keeps the live member count and chart data current without requiring manual refresh.
+ 
+.. code-block:: dart
+ 
+   void startLiveUpdates() {
+     liveTimer = Timer.periodic(const Duration(seconds: 50), (_) {
+       fetchAnalytics(selectedPeriod);
+     });
+   }
+ 
+.. warning::
+   The timer uses the value of ``selectedPeriod`` at the time each tick fires, not the value at the time the timer was created. This means switching period tabs will be reflected in subsequent live updates automatically.
+ 
+---
+ 
+``fetchAnalytics(String period)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+**Endpoint:** ``GET /api/my-analytics/?period=<period>``
+ 
+Fetches membership trend data and event attendance statistics for the given period.
+ 
+**Query parameter values:**
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 20 20 60
+ 
+   * - Value
+     - Label
+     - Backend behaviour
+   * - ``"week"``
+     - 1W
+     - Returns 7 daily data points labelled by day abbreviation (Mon, Tue…).
+   * - ``"month"``
+     - 1M
+     - Returns 30 daily data points labelled by date and month (e.g. 01 May).
+   * - ``"6months"``
+     - 6M
+     - Returns 26 weekly data points labelled by week number.
+   * - ``"year"``
+     - 1Y
+     - Returns 12 monthly data points labelled by month abbreviation (Jan, Feb…).
+ 
+**Response structure:**
+ 
+.. code-block:: json
+ 
+   {
+     "labels": ["Jan", "Feb", "Mar", "..."],
+     "totals": [10, 12, 15, "..."],
+     "live_count": 18,
+     "events_stats": [
+       { "title": "Tryouts", "attendee_count": 12 },
+       { "title": "AGM", "attendee_count": 5 }
+     ],
+     "most_popular": { "title": "Tryouts", "attendee_count": 12 },
+     "total_events": 4
+   }
+ 
+**Post-fetch state updates:**
+ 
+1. ``labels`` ← ``data["labels"]``
+2. ``values`` ← ``data["totals"]`` (cast to ``List<double>``)
+3. ``liveCount`` ← ``data["live_count"]``
+4. ``eventValues`` ← attendee counts from ``data["events_stats"]``
+5. ``eventNames`` ← titles from ``data["events_stats"]``
+6. ``values[values.length - 1]`` ← overwritten with ``liveCount`` to ensure the most recent point reflects real-time membership.
+ 
+**On error:** Catches and prints the exception. No error state is shown in the UI — the chart areas simply retain their previous data or remain empty.
+ 
+---
+ 
+``exportPdf()``
+~~~~~~~~~~~~~~~
+ 
+Generates an in-memory PDF document using the ``pdf`` package and sends it to the device's print/share dialog via the ``printing`` package.
+ 
+**PDF content:**
+ 
+- Title: ``"Society Analytics"``
+- Live member count
+- Membership trend table (label → value for each data point)
+- Event attendance table (event name → attendee count)
+ 
+**On success:** The system print dialog opens.
+ 
+**On failure:** A ``SnackBar`` is shown with the error message.
+ 
+.. note::
+   ``exportPdf`` does not require a network call — it uses the data already held in state from the last ``fetchAnalytics`` call.
+ 
+---
  
