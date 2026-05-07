@@ -325,3 +325,38 @@ Dialog actions:
 ---
  
 
+
+Calendar Colour Coding
+-----------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+ 
+   * - Colour
+     - Meaning
+   * - Purple ``(0xFF8B5CF6)``
+     - Exactly one event on that date.
+   * - Red ``Colors.red``
+     - Two or more events on that date.
+ 
+---
+ 
+Build Method
+------------
+ 
+.. code-block:: text
+ 
+   Scaffold
+   ├── AppBar: "Events Calendar" (no back button)
+   ├── body:
+   │   ├── isLoading == true  → CircularProgressIndicator
+   │   └── isLoading == false → EventBasedCalender
+   │         ├── events: calendarEvents
+   │         ├── primaryColor: Color(0xFF8B5CF6)
+   │         └── onDateTap: onDateTapped
+   └── bottomNavigationBar: AdminBottomNav(currentIndex: 2)
+ 
+---
+ 
+
