@@ -20,3 +20,22 @@ The page lives at ``lib/screens/admin/admin_events_page.dart`` and communicates 
    ``admin_events_page.dart`` requires ``societyId`` as a mandatory constructor argument. This is always sourced from ``ApiService.societyId`` when navigated to via ``AdminBottomNav``.
  
 ---
+
+
+Widget Structure
+----------------
+ 
+.. code-block:: text
+ 
+   AdminEventsPage (StatefulWidget)
+   └── _AdminEventsPageState (State)
+       ├── loadEvents()              → GET /societies/<id>/events/
+       ├── onDateTapped()            → Routes to _showEvents or _showCreateDialog
+       ├── _showEvents()             → AlertDialog listing events on a date
+       ├── _showCreateDialog()       → AlertDialog with event creation form
+       ├── _showEditDialog()         → AlertDialog with event edit form
+       ├── _createEvent()            → POST /societies/<id>/events/
+       ├── _updateEvent()            → PUT /events/<id>/update/
+       └── _deleteEvent()            → DELETE /events/<id>/delete/
+ 
+---
