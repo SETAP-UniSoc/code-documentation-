@@ -283,3 +283,36 @@ If any check fails, a descriptive ``SnackBar`` is shown and no API call is made.
      - User is not authenticated.
  
 ---
+
+
+
+ 
+``_updateSingleNotification(int societyId, bool enabled, String societyName)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+**Endpoint:** ``POST /api/notifications/``
+ 
+**Request body:**
+ 
+.. code-block:: json
+ 
+   {
+     "society_id": <societyId>,
+     "event_notifications": <true|false>
+   }
+ 
+Updates the notification preference for a single society. On success, updates the ``_notificationPrefs`` list in place so the UI toggle reflects the new state immediately without a full reload.
+ 
+---
+ 
+``_updateNotificationSettings(bool enabled)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+**Endpoint:** ``POST /api/notifications/``
+ 
+A higher-level method that first prompts the user to select a society via ``_showSocietySelectionDialog()``, then calls the notifications endpoint for the chosen society.
+ 
+.. note::
+   This method is available but the primary toggle UI uses ``_updateSingleNotification`` for per-society granularity.
+ 
+---
