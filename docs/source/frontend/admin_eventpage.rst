@@ -360,3 +360,51 @@ Build Method
 ---
  
 
+
+API Endpoints Summary
+---------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 10 45 45
+ 
+   * - Method
+     - Endpoint
+     - Purpose
+   * - ``GET``
+     - ``/api/societies/<societyId>/events/``
+     - Load all events for the society on page open and after mutations.
+   * - ``POST``
+     - ``/api/societies/<societyId>/events/``
+     - Create a new event for the society.
+   * - ``PUT``
+     - ``/api/events/<eventId>/update/``
+     - Update an existing event's title, description, and location.
+   * - ``DELETE``
+     - ``/api/events/<eventId>/delete/``
+     - Permanently delete an event.
+ 
+---
+ 
+Error Handling Summary
+-----------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+ 
+   * - Scenario
+     - Handling
+   * - Events fetch returns non-200
+     - ``isLoading`` set to false; calendar renders empty. No error message shown.
+   * - Create event fails (non-201)
+     - ``SnackBar`` shown with ``"Failed to create event: <statusCode>"``.
+   * - Update event fails (non-200)
+     - No explicit error shown — silent failure (``SnackBar`` only shown on success).
+   * - Delete event fails (non-204)
+     - No explicit error shown — silent failure.
+   * - Network exception on any call
+     - Unhandled — will propagate as an uncaught exception. Consider wrapping in ``try/catch`` for production hardening.
+ 
+---
+
