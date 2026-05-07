@@ -410,3 +410,51 @@ Live Update Behaviour
  
 ---
  
+
+
+Navigation
+----------
+ 
+``AdminAnalyticsPage`` is reached via ``AdminBottomNav`` at index 1:
+ 
+.. code-block:: dart
+ 
+   case 1:
+     Navigator.pushReplacement(
+       context,
+       MaterialPageRoute(builder: (_) => const AdminAnalyticsPage()),
+     );
+ 
+The page sets ``automaticallyImplyLeading: false`` on its ``AppBar`` — no back arrow is shown. Navigation is handled entirely through the bottom nav bar.
+ 
+---
+ 
+Dependencies
+------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 45 55
+ 
+   * - Dependency
+     - Role
+   * - ``package:flutter/material.dart``
+     - Core Flutter widgets.
+   * - ``dart:async``
+     - Provides ``Timer`` for live updates.
+   * - ``dart:convert``
+     - JSON decoding of API responses.
+   * - ``package:http/http.dart``
+     - HTTP client for the analytics API call.
+   * - ``package:fl_chart/fl_chart.dart``
+     - ``LineChart`` widget used for the membership trend chart.
+   * - ``package:pdf/widgets.dart``
+     - PDF document generation for the export feature.
+   * - ``package:printing/printing.dart``
+     - Sends the generated PDF to the device's print/share dialog.
+   * - ``package:unisoc/services/api_services.dart``
+     - Provides ``ApiService.baseUrl`` and ``ApiService.headers``.
+   * - ``package:unisoc/screens/admin/admin_bottom_nav.dart``
+     - Bottom navigation bar rendered at ``currentIndex: 1``.
+ 
+---
