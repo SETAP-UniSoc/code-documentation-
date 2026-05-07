@@ -167,3 +167,46 @@ Fetches the authenticated user's profile. On success, populates ``_userName`` an
 - Always sets ``_isLoading = false`` in the ``finally`` block.
  
 ---
+
+
+
+
+``_loadNotificationSettings()``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+**Endpoints:**
+ 
+- ``GET /api/notifications/`` — fetches existing notification preferences.
+- ``GET /api/my-societies/`` — fetches the user's joined societies as a fallback.
+ 
+**Logic:**
+ 
+1. Fetches notification preferences from ``/notifications/``.
+2. Fetches joined societies from ``/my-societies/`` to build a ``societyNameToId`` lookup map.
+3. If notification preferences exist, maps each preference to include the resolved ``society_id``.
+4. If no preferences exist, falls back to joined societies with ``notify_new_events: true`` as the default.
+5. If the notifications endpoint fails entirely, still attempts to load joined societies.
+ 
+.. note::
+   A society's ``id`` is resolved from its ``name`` using the ``societyNameToId`` map. If the name is not found, ``society_id`` defaults to ``-1``.
+ 
+---
+ 
+``_updateName()``
+~~~~~~~~~~~~~~~~~
+ 
+**Endpoint:** ``POST /api/user/profile/``
+ 
+**Request body:**
+ 
+.. code-block:: json
+ 
+   { "name": "<new_name>" }
+ 
+**Validation:** Rejects empty name strings before making the API call.
+ 
+**On success:** Updates ``_userName`` and exits edit mode (``_isEditingName = false``).
+ 
+**On failure:** Displays the HTTP status code in a ``SnackBar``.
+ 
+---
