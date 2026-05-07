@@ -454,3 +454,28 @@ Dependencies
      - Bottom navigation bar rendered at ``currentIndex: 2``.
  
 ---
+
+
+
+Related Files
+-------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 45 55
+ 
+   * - File
+     - Description
+   * - ``lib/screens/admin/admin_events_page.dart``
+     - This page's source file.
+   * - ``lib/screens/admin/admin_bottom_nav.dart``
+     - Shared bottom navigation bar for admin screens.
+   * - ``lib/services/api_services.dart``
+     - Centralises ``baseUrl``, auth token, and HTTP headers.
+   * - Backend ``views.py`` → ``SocietyEventView``
+     - Handles ``GET`` (list events) and ``POST`` (create event) for a society.
+   * - Backend ``views.py`` → ``UpdateEventView``
+     - Handles ``PUT`` for updating an event. Restricted to the event's creator.
+   * - Backend ``views.py`` → ``DeleteEventView``
+     - Handles ``DELETE`` for removing an event. Restricted to the event's creator.
+ 
