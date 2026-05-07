@@ -139,3 +139,31 @@ Disposes all five ``TextEditingController`` instances to free memory when the wi
    }
  
 ---
+
+
+
+API Methods
+-----------
+ 
+``_loadUserData()``
+~~~~~~~~~~~~~~~~~~~
+ 
+**Endpoint:** ``GET /api/user/profile/``
+ 
+Fetches the authenticated user's profile. On success, populates ``_userName`` and ``_userEmail``. Falls back to ``first_name`` if ``name`` is absent.
+ 
+**Name resolution logic:**
+ 
+.. code-block:: text
+ 
+   if data["name"] is not null and not empty  → use data["name"]
+   else if data["first_name"] is not null and not empty → use data["first_name"]
+   else → use "User"
+ 
+**Error handling:**
+ 
+- ``statusCode != 200`` → sets ``_errorMessage`` with the status code.
+- Network exception → sets ``_errorMessage`` to ``"Connection error: Unable to load profile"``.
+- Always sets ``_isLoading = false`` in the ``finally`` block.
+ 
+---
