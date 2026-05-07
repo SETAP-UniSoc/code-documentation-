@@ -95,3 +95,43 @@ State Variables
  
 ---
  
+ 
+Lifecycle
+---------
+ 
+``initState``
+~~~~~~~~~~~~~
+ 
+Defers the initial data fetch to after the first frame using ``WidgetsBinding.instance.addPostFrameCallback``, then starts the live update timer:
+ 
+.. code-block:: dart
+ 
+   @override
+   void initState() {
+     super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+       fetchAnalytics(selectedPeriod);
+     });
+     startLiveUpdates();
+   }
+ 
+.. note::
+   The post-frame callback is used to ensure the widget tree is fully built before the first API call triggers a ``setState``, avoiding the "setState called during build" assertion error.
+ 
+``dispose``
+~~~~~~~~~~~
+ 
+Cancels the live update timer to prevent memory leaks and dangling callbacks:
+ 
+.. code-block:: dart
+ 
+   @override
+   void dispose() {
+     liveTimer?.cancel();
+     super.dispose();
+   }
+ 
+---
+ 
+
+ 
