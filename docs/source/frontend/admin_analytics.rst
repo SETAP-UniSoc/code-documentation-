@@ -345,3 +345,47 @@ Build Method
    └── bottomNavigationBar: AdminBottomNav(currentIndex: 1)
  
 ---
+
+
+
+
+API Endpoints Summary
+---------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 10 45 45
+ 
+   * - Method
+     - Endpoint
+     - Purpose
+   * - ``GET``
+     - ``/api/my-analytics/?period=<period>``
+     - Fetch membership trend data, live count, and event attendance stats.
+ 
+---
+ 
+Error Handling Summary
+-----------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+ 
+   * - Scenario
+     - Handling
+   * - Analytics fetch returns non-200
+     - State is not updated; previous chart data is retained. No error shown.
+   * - Network exception during fetch
+     - Caught and printed. UI retains previous state silently.
+   * - PDF export fails
+     - ``SnackBar`` shown with the exception message.
+   * - Non-admin user accesses the page
+     - Backend returns 403. Fetch silently fails (no error shown in UI).
+   * - ``values`` is empty on render
+     - Headline falls back to ``liveCount.toString()``; chart shows ``"No data yet"``.
+   * - ``eventValues`` / ``eventNames`` empty on render
+     - Event attendance section shows empty state with icon and hint text.
+ 
+---
+ 
