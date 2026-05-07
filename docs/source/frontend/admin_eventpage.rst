@@ -236,3 +236,22 @@ Fetches all events for the admin's society and prepares them for calendar displa
 ---
 
  
+
+ 
+User Interaction Flow
+---------------------
+ 
+Date Tap Routing — ``onDateTapped(DateTime date)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+The calendar's ``onDateTap`` callback always calls ``onDateTapped``. The method compares the tapped date against all ``normalized_date`` values in ``eventData``:
+ 
+.. code-block:: text
+ 
+   User taps a calendar date
+   │
+   ├── Events exist on that date?
+   │   ├── YES → _showEvents(eventsOnDate)
+   │   └── NO  → _showCreateDialog(date)
+ 
+---
