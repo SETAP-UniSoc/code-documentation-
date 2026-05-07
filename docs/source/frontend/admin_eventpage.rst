@@ -65,4 +65,29 @@ Constructor Parameters
      - Optional injectable HTTP client. Defaults to ``http.Client()`` if not provided. Used for unit testing.
  
 ---
+
+
+
+State Variables
+---------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 30 25 45
+ 
+   * - Variable
+     - Type
+     - Description
+   * - ``calendarEvents``
+     - ``List<Event>``
+     - List of ``Event`` objects consumed by the ``EventBasedCalender`` widget. Each entry represents one calendar day marker.
+   * - ``eventData``
+     - ``List``
+     - Raw event data returned from the API, enriched with a ``normalized_date`` field for local timezone-aware date comparison.
+   * - ``isLoading``
+     - ``bool``
+     - Controls the full-page ``CircularProgressIndicator`` shown while events are being fetched.
+ 
+---
+
  
