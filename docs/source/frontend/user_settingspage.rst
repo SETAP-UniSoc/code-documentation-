@@ -316,3 +316,48 @@ A higher-level method that first prompts the user to select a society via ``_sho
    This method is available but the primary toggle UI uses ``_updateSingleNotification`` for per-society granularity.
  
 ---
+
+
+
+UI Sections
+-----------
+ 
+The page body is a ``SingleChildScrollView`` containing the following sections in order:
+ 
+My Details
+~~~~~~~~~~
+ 
+Displays the user's name and email.
+ 
+- **Name row:** Shows the name in a read-only container. An ``IconButton`` with ``Icons.edit`` switches to a ``TextField`` backed by ``_nameController``. The icon changes to ``Icons.save`` and pressing it calls ``_updateName()``.
+- **Email display:** Read-only ``Container`` showing ``_userEmail``. Not editable directly here.
+ 
+Change Email
+~~~~~~~~~~~~
+ 
+Contains a single ``TextField`` (hint: ``"Enter new email"``) and an **Update Email** ``ElevatedButton`` that calls ``_updateEmail()``.
+ 
+Change Password
+~~~~~~~~~~~~~~~
+ 
+Contains three ``TextField`` widgets (all ``obscureText: true`` by default):
+ 
+1. Current Password
+2. New Password
+3. Confirm New Password
+ 
+Each field has a visibility toggle ``IconButton`` (``Icons.visibility_off`` / ``Icons.visibility``). A **Change Password** ``ElevatedButton`` calls ``_changePassword()``.
+ 
+Notifications
+~~~~~~~~~~~~~
+ 
+Renders one ``Container`` per entry in ``_notificationPrefs``, each showing:
+ 
+- Society name
+- Subtitle: ``"Receive updates about events"``
+- A ``Switch`` widget whose ``onChanged`` calls ``_updateSingleNotification()``
+ 
+If ``_notificationPrefs`` is empty, displays ``"No societies joined yet"``.
+ 
+---
+ 
