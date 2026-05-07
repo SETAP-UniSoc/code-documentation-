@@ -434,3 +434,32 @@ Dependencies
      - Provides ``ApiService.baseUrl`` and ``ApiService.headers``.
  
 ---
+
+
+
+
+
+Related Files
+-------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 45 55
+ 
+   * - File
+     - Description
+   * - ``lib/services/api_services.dart``
+     - Centralises ``baseUrl``, auth token, and HTTP headers.
+   * - ``lib/screens/user/user_settings_page.dart``
+     - This page's source file.
+   * - Backend ``views.py`` → ``UserProfileView``
+     - Handles ``GET`` and ``PATCH`` for user profile.
+   * - Backend ``views.py`` → ``ChangeEmailView``
+     - Handles email update with duplicate-check logic.
+   * - Backend ``views.py`` → ``ChangePasswordView``
+     - Handles password update with old-password verification.
+   * - Backend ``views.py`` → ``NotificationView``
+     - Handles ``GET`` and ``POST`` for notification preferences.
+   * - Backend ``views.py`` → ``MySocietiesView``
+     - Returns the list of societies the user has joined.
+ 
