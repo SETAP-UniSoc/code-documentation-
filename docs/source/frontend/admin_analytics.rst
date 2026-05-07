@@ -266,3 +266,54 @@ The active button is shown in purple with a 2px underline indicator. Inactive bu
  
 ---
  
+
+Headline Member Count
+~~~~~~~~~~~~~~~~~~~~~
+ 
+Displays the last value in ``values`` (which is always ``liveCount`` after a fetch) as a large bold number above the chart. Falls back to ``liveCount.toString()`` if ``values`` is empty.
+ 
+---
+ 
+Membership Trend Chart — ``_buildChart(List<double> data)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Rendered using ``LineChart`` from the ``fl_chart`` package.
+ 
+**Chart properties:**
+ 
+- **Curve:** Smooth (``isCurved: true``)
+- **Bar width:** 3px
+- **Dots:** Hidden (``FlDotData(show: false)``)
+- **Gradient:** Purple → deep purple line
+- **Fill area:** Purple with opacity fade from 0.4 to 0.05
+- **Y-axis max:** ``maxValue * 1.2`` to provide breathing room
+- **Grid:** Hidden
+- **Border:** Hidden
+ 
+**Empty state:** Shows ``"No data yet"`` centred in the chart area.
+ 
+**Loading state:** Shows a ``CircularProgressIndicator`` in place of the chart.
+ 
+---
+ 
+Event Attendance Chart — ``_buildEventList(List<double> data, List<String> names)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+A custom horizontal bar chart built with a ``ListView.builder`` scrolling horizontally. Each item is a ``Column`` containing:
+ 
+1. Attendee count label (purple, bold)
+2. A purple ``Container`` bar whose height is proportional to the event's attendee count relative to the maximum value across all events. Clamped between 10px and 150px.
+3. Event name label (truncated to 2 lines)
+ 
+**Bar height formula:**
+ 
+.. code-block:: text
+ 
+   barHeight = (attendeeCount / maxValue) * 150
+   barHeight = barHeight.clamp(10.0, 150.0)
+ 
+**Empty state:** Shows a grey bar chart icon, ``"No event attendance data yet"``, and a hint explaining that data appears when users attend events.
+ 
+**Loading state:** Shows a ``CircularProgressIndicator``.
+ 
+---
