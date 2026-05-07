@@ -389,3 +389,48 @@ API Endpoints Summary
  
 ---
  
+
+
+Error Handling Summary
+----------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+ 
+   * - Scenario
+     - Handling
+   * - Profile load fails (non-200)
+     - ``_errorMessage`` set; shown as a red banner at the top of the page.
+   * - Profile load network error
+     - ``_errorMessage`` set to ``"Connection error: Unable to load profile"``.
+   * - Notification load fails
+     - Falls back to joined societies with default ``notify_new_events: true``.
+   * - Any update fails (non-200)
+     - ``SnackBar`` shown with error message parsed from response body where available.
+   * - Network error on any update
+     - ``SnackBar`` shown with a generic error message.
+   * - Widget unmounted mid-request
+     - All ``setState`` calls are guarded by lifecycle — controllers disposed cleanly.
+ 
+---
+ 
+Dependencies
+------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 35 65
+ 
+   * - Dependency
+     - Role
+   * - ``package:flutter/material.dart``
+     - Core Flutter widgets.
+   * - ``package:http/http.dart``
+     - HTTP client for all API calls.
+   * - ``dart:convert``
+     - JSON encoding and decoding.
+   * - ``package:unisoc/services/api_services.dart``
+     - Provides ``ApiService.baseUrl`` and ``ApiService.headers``.
+ 
+---
