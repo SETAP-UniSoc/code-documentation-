@@ -458,3 +458,24 @@ Dependencies
      - Bottom navigation bar rendered at ``currentIndex: 1``.
  
 ---
+
+
+
+Related Files
+-------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 45 55
+ 
+   * - File
+     - Description
+   * - ``lib/screens/admin/admin_analytics_page.dart``
+     - This page's source file.
+   * - ``lib/screens/admin/admin_bottom_nav.dart``
+     - Shared bottom navigation bar for admin screens.
+   * - ``lib/services/api_services.dart``
+     - Centralises ``baseUrl``, auth token, and HTTP headers.
+   * - Backend ``views.py`` → ``AnalyticsView``
+     - Handles ``GET /my-analytics/``. Returns membership trend data, live count, event stats, and most popular event. Admin-only (returns 403 for other roles).
+ 
