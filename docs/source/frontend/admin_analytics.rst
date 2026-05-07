@@ -55,3 +55,43 @@ Constructor Parameters
      - Optional injectable HTTP client. Defaults to ``http.Client()`` if not provided. Used for unit testing.
  
 ---
+
+
+
+State Variables
+---------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 30 20 50
+ 
+   * - Variable
+     - Type
+     - Description
+   * - ``selectedPeriod``
+     - ``String``
+     - The currently active time period. Defaults to ``"year"``. Accepted values: ``"week"``, ``"month"``, ``"6months"``, ``"year"``.
+   * - ``labels``
+     - ``List<String>``
+     - X-axis labels for the membership trend chart (e.g. ``["Jan", "Feb", ...]``).
+   * - ``values``
+     - ``List<double>``
+     - Y-axis data points for the membership trend chart. The last value is overwritten with ``liveCount`` after each fetch.
+   * - ``eventValues``
+     - ``List<double>``
+     - Attendee counts per event, used for the horizontal bar chart.
+   * - ``eventNames``
+     - ``List<String>``
+     - Event title labels corresponding to each value in ``eventValues``.
+   * - ``liveCount``
+     - ``int``
+     - The current active member count. Used as the headline figure and overwrites the last data point in ``values``.
+   * - ``isLoading``
+     - ``bool``
+     - Controls the ``CircularProgressIndicator`` shown inside both chart areas during fetches.
+   * - ``liveTimer``
+     - ``Timer?``
+     - Periodic timer that triggers ``fetchAnalytics`` every 50 seconds. Cancelled in ``dispose()``.
+ 
+---
+ 
