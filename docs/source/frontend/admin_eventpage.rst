@@ -90,4 +90,42 @@ State Variables
  
 ---
 
+
+
+Lifecycle
+---------
+ 
+``initState``
+~~~~~~~~~~~~~
+ 
+Calls ``loadEvents()`` immediately after the widget is inserted into the tree:
+ 
+.. code-block:: dart
+ 
+   @override
+   void initState() {
+     super.initState();
+     loadEvents();
+   }
+ 
+---
+ 
+Helper Method
+-------------
+ 
+``getDateOnly(DateTime dt)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Strips the time component from a ``DateTime`` and returns a date-only ``DateTime`` in local timezone. Used internally during event processing.
+ 
+.. code-block:: dart
+ 
+   DateTime getDateOnly(DateTime dt) {
+     final local = dt.toLocal();
+     return DateTime(local.year, local.month, local.day);
+   }
+ 
+---
+ 
+
  
