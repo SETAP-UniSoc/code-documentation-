@@ -255,3 +255,73 @@ The calendar's ``onDateTap`` callback always calls ``onDateTapped``. The method 
    │   └── NO  → _showCreateDialog(date)
  
 ---
+
+
+Events Dialog — ``_showEvents(List events)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Displayed when the tapped date has one or more events. Shows an ``AlertDialog`` with a scrollable ``ListView`` of ``ListTile`` widgets, one per event.
+ 
+Each ``ListTile`` shows:
+ 
+- **Title:** Event title.
+- **Subtitle:** ``HH:MM • location • Cap: N`` (or ``No Cap`` if unlimited).
+- **Trailing:** A red delete ``IconButton`` that calls ``_deleteEvent(id)`` after closing the dialog.
+- **onTap:** Closes the dialog and opens ``_showEditDialog`` for that event.
+ 
+Dialog actions:
+ 
+- **Close** — Dismisses the dialog.
+- **Add Another** — Closes the dialog and opens ``_showCreateDialog`` pre-populated with the date of the first listed event.
+ 
+---
+ 
+Create Dialog — ``_showCreateDialog(DateTime date)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+An ``AlertDialog`` wrapped in a ``StatefulBuilder`` so the time picker selections update the dialog UI without rebuilding the whole page.
+ 
+Fields:
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+ 
+   * - Field
+     - Description
+   * - Title
+     - Free-text ``TextField``.
+   * - Description
+     - Free-text ``TextField``.
+   * - Location
+     - Free-text ``TextField``.
+   * - Capacity (optional)
+     - Numeric ``TextField``. Left empty for unlimited capacity.
+   * - Start Time
+     - ``ListTile`` that opens ``showTimePicker``. Defaults to 09:00.
+   * - End Time
+     - ``ListTile`` that opens ``showTimePicker``. Defaults to 10:00.
+ 
+Dialog actions:
+ 
+- **Cancel** — Dismisses without saving.
+- **Create** — Converts picked times to UTC, calls ``_createEvent()``, then closes the dialog.
+ 
+---
+ 
+Edit Dialog — ``_showEditDialog(Map event)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+A simpler ``AlertDialog`` pre-filled with the event's existing ``title``, ``description``, and ``location``.
+ 
+.. note::
+   The edit dialog does **not** allow changing ``start_time`` or ``end_time``. The original timestamps are passed through unchanged to ``_updateEvent()``.
+ 
+Dialog actions:
+ 
+- **Cancel** — Dismisses without saving.
+- **Save** — Calls ``_updateEvent()`` with the updated fields, then closes.
+ 
+---
+ 
+
