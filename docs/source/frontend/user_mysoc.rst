@@ -169,7 +169,7 @@ vertically scrolling ``ListView`` with 12 px spacing between cards.
    │  ●  Photography Society          │
    │     A community for enthusiasts  │
    │     42 members              >    │
-   ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┤
+   ├ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─|
    │  ●  Chess Club                   │
    │     Weekly sessions              │
    │     15 members              >    │
