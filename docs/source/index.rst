@@ -62,6 +62,8 @@ Frontend
    frontend/user_myeventspage   
    frontend/user_signup
    frontend/user_settingspage
+   frontend/event_details
+   frontend/admin_eventpage
 
 
 API
