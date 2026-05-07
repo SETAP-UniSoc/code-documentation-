@@ -39,3 +39,30 @@ Widget Structure
        └── _deleteEvent()            → DELETE /events/<id>/delete/
  
 ---
+
+
+
+
+ 
+Constructor Parameters
+-----------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 25 15 15 45
+ 
+   * - Parameter
+     - Type
+     - Required
+     - Description
+   * - ``societyId``
+     - ``int``
+     - Yes
+     - The ID of the admin's society. Used in all API endpoint paths.
+   * - ``httpClient``
+     - ``http.Client?``
+     - No
+     - Optional injectable HTTP client. Defaults to ``http.Client()`` if not provided. Used for unit testing.
+ 
+---
+ 
