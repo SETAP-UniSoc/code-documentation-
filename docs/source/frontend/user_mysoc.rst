@@ -118,7 +118,7 @@ Displayed while the network request is in flight.
    │          My Societies            │  ← AppBar
    ├──────────────────────────────────┤
    │                                  │
-   │        [CircularProgressIndicator]│
+   │    [CircularProgressIndicator]   │
    │                                  │
    └──────────────────────────────────┘
  
