@@ -317,3 +317,31 @@ A custom horizontal bar chart built with a ``ListView.builder`` scrolling horizo
 **Loading state:** Shows a ``CircularProgressIndicator``.
  
 ---
+
+
+
+Export Button
+~~~~~~~~~~~~~
+ 
+A ``TextButton`` labelled ``"Export as PDF"`` that calls ``exportPdf()``. Positioned between the live member count and the event attendance chart.
+ 
+---
+ 
+Build Method
+------------
+ 
+.. code-block:: text
+ 
+   Scaffold
+   ├── AppBar: "My Analytics" (no back button)
+   ├── body: SingleChildScrollView
+   │   ├── Period selector row (1W / 1M / 6M / 1Y)
+   │   ├── Headline member count text
+   │   ├── Membership trend LineChart (height: 250)
+   │   ├── "Live Members: N" label
+   │   ├── "Export as PDF" TextButton
+   │   ├── "Event Attendance" heading
+   │   └── Event attendance bar chart (height: 300)
+   └── bottomNavigationBar: AdminBottomNav(currentIndex: 1)
+ 
+---
