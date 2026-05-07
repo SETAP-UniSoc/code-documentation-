@@ -360,4 +360,32 @@ Renders one ``Container`` per entry in ``_notificationPrefs``, each showing:
 If ``_notificationPrefs`` is empty, displays ``"No societies joined yet"``.
  
 ---
+
+
+
+API Endpoints Summary
+---------------------
+ 
+.. list-table::
+   :header-rows: 1
+   :widths: 10 35 55
+ 
+   * - Method
+     - Endpoint
+   * - ``GET``
+     - ``/api/user/profile/``
+   * - ``POST``
+     - ``/api/user/profile/``
+   * - ``POST``
+     - ``/api/change-email/``
+   * - ``POST``
+     - ``/api/change-password/``
+   * - ``GET``
+     - ``/api/notifications/``
+   * - ``GET``
+     - ``/api/my-societies/``
+   * - ``POST``
+     - ``/api/notifications/``
+ 
+---
  
