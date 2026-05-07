@@ -64,6 +64,7 @@ Frontend
    frontend/user_settingspage
    frontend/event_details
    frontend/admin_eventpage
+   frontend/admin_analytics
 
 
 API
