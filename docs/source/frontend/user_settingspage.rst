@@ -100,3 +100,42 @@ State Variables
      - Error message shown in the UI when profile loading fails.
  
 ---
+
+
+
+
+Lifecycle
+---------
+ 
+``initState``
+~~~~~~~~~~~~~
+ 
+Called once when the widget is first inserted into the tree. Triggers two parallel data loads:
+ 
+.. code-block:: dart
+ 
+   @override
+   void initState() {
+     super.initState();
+     _loadUserData();
+     _loadNotificationSettings();
+   }
+ 
+``dispose``
+~~~~~~~~~~~
+ 
+Disposes all five ``TextEditingController`` instances to free memory when the widget is removed:
+ 
+.. code-block:: dart
+ 
+   @override
+   void dispose() {
+     _nameController.dispose();
+     _newEmailController.dispose();
+     _currentPasswordController.dispose();
+     _newPasswordController.dispose();
+     _confirmPasswordController.dispose();
+     super.dispose();
+   }
+ 
+---
