@@ -221,7 +221,6 @@ Example Gmail SMTP configuration:
 
    python manage.py runserver 0.0.0.0:8000
 
-
 12. Start Celery worker
 
 Open another terminal:
@@ -229,7 +228,6 @@ Open another terminal:
 .. code-block:: bash
 
    celery -A backend worker --loglevel=info
-
 
 13. Start Redis server
 
@@ -303,11 +301,13 @@ Frontend Dependencies Installed:
 - cupertino_icons: ^1.0.8 (iOS icons)
 - flutter_calenders: ^0.0.7 (Calendar widget)
 
-
 Notes
 -----
 
 - Ensure PostgreSQL and Redis are running
+- Run backend and frontend concurrently
+- Ensure correct API endpoint URLs in Flutter code
+- Make sure IP address in API calls is correct (use local IP for emulator)
 - Update environment variables before deployment
 - In order to run the application on a virtual machine, an Android emulator has been used,
  or to you can run the application on a application of you choice through the command line by using the command ``flutter run -d <device_id>``.
