@@ -147,7 +147,7 @@ The page uses different endpoints based on user role:
 Role-Based Views
 ----------------
 
-### Admin View (Own Society)
+Admin View (Own Society)
 
 When an admin views their own society (``isOwnSociety = true``):
 
@@ -156,7 +156,7 @@ When an admin views their own society (``isOwnSociety = true``):
 - **No Join/Leave button**
 - **No Attend button** on events
 
-### Admin View (Other Society)
+Admin View (Other Society)
 
 When an admin views another society (``isOwnSociety = false``):
 
@@ -166,7 +166,7 @@ When an admin views another society (``isOwnSociety = false``):
 - **No Attend button** on events
 - Read-only view
 
-### Regular User View
+Regular User View
 
 When a regular user views any society (``isAdmin = false``):
 
@@ -180,7 +180,7 @@ When a regular user views any society (``isAdmin = false``):
 Society Details
 ---------------
 
-### Society Header
+ Society Header
 
 Displays the society logo, name, and category:
 
@@ -188,7 +188,7 @@ Displays the society logo, name, and category:
 - Otherwise, shows gradient placeholder with business icon
 - Category chip appears if category exists
 
-### About Section
+About Section
 
 .. code-block:: dart
 
