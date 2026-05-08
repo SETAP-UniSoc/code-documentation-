@@ -243,6 +243,8 @@ Mac/Linux:
 
    redis-server
 
+
+
 Frontend Setup
 --------------
 
@@ -252,13 +254,37 @@ Frontend Setup
 
    cd Unisoc
 
-2. Get dependencies:
+2. Configure Android permissions:
+
+Add the following to `android/app/src/main/AndroidManifest.xml`:
+
+.. code-block:: xml
+
+   <uses-permission android:name="android.permission.INTERNET" />
+   <application android:usesCleartextTraffic="true" ...>
+
+
+3. Get dependencies:
 
 .. code-block:: bash
 
    flutter pub get
+
+4. Update ApiService baseUrl
+
+.. code-block:: dart
    
-3. Run the application:
+   static const String baseUrl = "http://<YOUR_BACKEND_IP>:8000/api";
+
+
+Options for `<YOUR_BACKEND_IP>`:
+- **For emulator (backend on same computer):** Use `10.0.2.2`
+- **For physical device (same WiFi):** Use your computer's local IP address (e.g., `192.168.1.100`)
+
+
+
+   
+5. Run the application:
 
 .. code-block:: bash
 
