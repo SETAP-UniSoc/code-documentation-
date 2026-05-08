@@ -118,7 +118,7 @@ Administrators must select their assigned society before logging in:
 Authentication Flow
 -------------------
 
-### Login Request
+Login Request
 
 When the administrator submits the login form:
 
@@ -155,7 +155,7 @@ When the administrator submits the login form:
 Validation
 ----------
 
-### Frontend Validation
+Frontend Validation
 
 .. list-table::
    :header-rows: 1
@@ -172,7 +172,7 @@ Validation
    * - No society selected
      - "Please select a society"
 
-### Backend Validation
+Backend Validation
 
 .. list-table::
    :header-rows: 1
@@ -284,7 +284,7 @@ API Endpoints
 Response Format
 ---------------
 
-### Successful Login (200 OK)
+Successful Login (200 OK)
 
 .. code-block:: json
 
@@ -296,7 +296,7 @@ Response Format
      "society_name": "Football Society"
    }
 
-### Failed Login (401 Unauthorized)
+Failed Login (401 Unauthorized)
 
 .. code-block:: json
 
@@ -304,7 +304,7 @@ Response Format
      "error": "Invalid credentials"
    }
 
-### Society Mismatch (403 Forbidden)
+Society Mismatch (403 Forbidden)
 
 .. code-block:: json
 
