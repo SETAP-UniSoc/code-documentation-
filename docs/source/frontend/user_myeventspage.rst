@@ -245,28 +245,6 @@ Populated List
 Shown when ``_myEvents`` is non-empty. Events are rendered in a ``ListView.builder``
 with 16 px padding and 20 px bottom margin between cards.
  
-::
- 
-   ┌──────────────────────────────────┐
-   │           My Events              │
-   ├──────────────────────────────────┤
-   │  ┌────────────────────────────┐  │
-   │  │ [Society Header]           │  │  ← Only in all-societies mode
-   │  │  📁 Photography Society    │  │
-   │  │     1 Jun 2025 at 14:00    │  │
-   │  ├────────────────────────────┤  │
-   │  │  Macro Workshop            │  │
-   │  │  📅  1 Jun 2025 at 14:00   │  │
-   │  │  📍  Room 2B               │  │
-   │  │                            │  │
-   │  │  Learn macro techniques... │  │
-   │  │                            │  │
-   │  │  👥  Capacity: 30          │  │
-   │  │                            │  │
-   │  │  [ Leave Event ]           │  │
-   │  └────────────────────────────┘  │
-   └──────────────────────────────────┘
- 
 ---
 
 Event Card

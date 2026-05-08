@@ -65,6 +65,9 @@ Frontend
    frontend/event_details
    frontend/admin_eventpage
    frontend/admin_analytics
+   frontend/admin_homepage
+   frontend/admin_login
+   frontend/society_profile_page
 
 
 API
