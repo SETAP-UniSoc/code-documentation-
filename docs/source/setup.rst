@@ -68,8 +68,17 @@ Frontend Setup
 .. code-block:: bash
 
    flutter pub get
+
+3.Update ApiService baseUrl
+
+.. code-block:: dart
    
-3. Run the application:
+   static const String baseUrl = "http://<YOUR_BACKEND_IP>:8000/api";
+
+   
+
+   
+4. Run the application:
 
 .. code-block:: bash
 
